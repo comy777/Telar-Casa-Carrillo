@@ -1,0 +1,20 @@
+{
+  "name": "@telar/api-client",
+  "version": "0.0.0",
+  "private": true,
+  "type": "module",
+  "exports": {
+    ".": "./src/index.ts"
+  },
+  "scripts": {
+    "generate": "openapi-typescript ${API_DOCS_URL:-http://localhost:3001/api/docs-json} -o src/schema.d.ts",
+    "check": "node scripts/check-schema.mjs",
+    "typecheck": "tsc --noEmit"
+  },
+  "dependencies": {
+    "openapi-fetch": "0.17.0"
+  },
+  "devDependencies": {
+    "openapi-typescript": "7.13.0"
+  }
+}

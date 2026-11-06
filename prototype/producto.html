@@ -1,0 +1,100 @@
+<!doctype html>
+<html lang="es-CO">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Ruana de lana virgen gris oveja · Telar Casa Carrillo</title>
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body data-pagina="producto.html">
+  <div data-encabezado></div>
+
+  <main class="envoltura">
+    <p class="migas"><a href="index.html">Inicio</a> / <a href="catalogo.html">Ruanas</a> / Ruana de lana virgen gris oveja</p>
+
+    <div class="ficha">
+      <div class="galeria">
+        <div class="principal" style="--lana:#a39e95"><span>[Foto real: la ruana puesta, de frente]</span></div>
+        <ul class="miniaturas" aria-label="Fotos de la pieza">
+          <li><button aria-current="true" style="--lana:#a39e95" aria-label="Foto 1: de frente"></button></li>
+          <li><button aria-current="false" style="--lana:#8f8a81" aria-label="Foto 2: doblada"></button></li>
+          <li><button aria-current="false" style="--lana:#b5b0a7" aria-label="Foto 3: detalle del tejido"></button></li>
+          <li><button aria-current="false" style="--lana:#7d786f" aria-label="Foto 4: los flecos"></button></li>
+        </ul>
+      </div>
+
+      <form class="tabla" onsubmit="event.preventDefault()">
+        <h1>Ruana de lana virgen gris oveja</h1>
+        <p class="tejedor">Tejida en telar por <a href="#quien"><span class="marcador">[nombre del tejedor]</span></a></p>
+        <p class="precio-pintado">$ 289.000</p>
+        <p class="nota-iva">IVA incluido · Envío a toda Colombia</p>
+
+        <fieldset class="opciones">
+          <legend>Color de la lana: gris oveja</legend>
+          <div class="muestras">
+            <label class="muestra"><input type="radio" name="color" checked aria-label="Gris oveja"><span style="--lana:#a39e95"></span></label>
+            <label class="muestra"><input type="radio" name="color" aria-label="Nogal"><span style="--lana:#5b4232"></span></label>
+            <label class="muestra"><input type="radio" name="color" aria-label="Negro natural"><span style="--lana:#262220"></span></label>
+            <label class="muestra"><input type="radio" name="color" aria-label="Crudo, agotado" disabled><span style="--lana:#d9d2c3"></span></label>
+          </div>
+        </fieldset>
+
+        <p class="existencias pocas">Quedan 3 en este color</p>
+
+        <div class="compra">
+          <div class="cantidad" role="group" aria-label="Cantidad">
+            <button type="button" data-paso="-1" aria-label="Quitar una">−</button>
+            <output aria-live="polite">1</output>
+            <button type="button" data-paso="1" aria-label="Agregar una">+</button>
+          </div>
+          <button class="boton boton-accion" type="submit">Agregar al carrito</button>
+        </div>
+
+        <ul class="garantias">
+          <li>Llega en 3 a 6 días hábiles <span class="marcador">[confirmar con transportadora]</span></li>
+          <li>Cambios y devoluciones según la política de la tienda</li>
+          <li>Pago seguro con Wompi: tarjeta, PSE o Nequi</li>
+        </ul>
+      </form>
+    </div>
+
+    <section class="detalle" aria-label="Detalles de la pieza">
+      <div>
+        <h2>La pieza</h2>
+        <p><span class="marcador">[Descripción real de la pieza, cargada desde el panel administrativo.]</span></p>
+      </div>
+      <div>
+        <h2>Materiales y técnica</h2>
+        <ul>
+          <li>Lana virgen de oveja, sin teñir</li>
+          <li>Tejida en telar de pedal</li>
+          <li>Medidas: <span class="marcador">[ancho × largo]</span></li>
+          <li>Cuidado: <span class="marcador">[instrucciones de lavado]</span></li>
+        </ul>
+      </div>
+      <div id="quien">
+        <h2>Quién la tejió</h2>
+        <div class="quien">
+          <div class="retrato">[Retrato real]</div>
+          <div>
+            <p><strong><span class="marcador">[Nombre]</span></strong></p>
+            <p><span class="marcador">[Una línea de su biografía, desde el perfil del artesano.]</span></p>
+            <p><a href="#">Ver todas sus piezas</a></p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="seccion" aria-labelledby="t-relacionadas" style="padding-top:0">
+      <div class="cabecera">
+        <h2 class="titulo" id="t-relacionadas">Del mismo telar</h2>
+        <a href="catalogo.html">Ver todas las ruanas</a>
+      </div>
+      <ul class="piezas" data-piezas="Ruanas" data-max="4"></ul>
+    </section>
+  </main>
+
+  <div data-pie></div>
+  <script src="app.js"></script>
+</body>
+</html>

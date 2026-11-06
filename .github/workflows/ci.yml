@@ -1,0 +1,30 @@
+name: CI
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+
+permissions:
+  contents: read
+
+jobs:
+  calidad:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version-file: .nvmrc
+          cache: npm
+      - run: npm ci
+      - name: Lint
+        run: npm run lint
+      - name: Tipos
+        run: npm run typecheck
+      - name: Pruebas unitarias
+        run: npm test
+      # El build de producción prerenderiza el catálogo y necesita la API; se hace en el
+      # despliegue (o en un job con el backend levantado). Las pruebas E2E también:
+      #   TIENDA_URL=https://staging... PW_CHANNEL=chrome npx playwright test

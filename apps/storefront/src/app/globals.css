@@ -1,0 +1,7 @@
+@import "tailwindcss";
+@import "@telar/ui/theme.css";
+@import "@telar/ui/components.css";
+@import "@telar/ui/extras.css";
+@import "./tienda.css";
+
+@source "../../../../packages/ui/src";

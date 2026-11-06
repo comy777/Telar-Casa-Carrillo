@@ -1,0 +1,516 @@
+{
+  "schemaVersion": 2,
+  "generatedAt": "2026-11-06T12:56:47.650Z",
+  "title": "Design System: Telar Casa Carrillo",
+  "extensions": {
+    "colorMeta": {
+      "cal": {
+        "role": "neutral",
+        "displayName": "Cal (muro encalado)",
+        "canonical": "oklch(96.6% 0.004 106.5)",
+        "tonalRamp": [
+          "#121211",
+          "#2b2b2a",
+          "#484845",
+          "#666664",
+          "#868684",
+          "#a8a8a5",
+          "#cacac9",
+          "#eeeeed"
+        ]
+      },
+      "cal-sombra": {
+        "role": "neutral",
+        "displayName": "Cal sombra",
+        "canonical": "oklch(92.7% 0.007 106.5)",
+        "tonalRamp": [
+          "#121210",
+          "#2b2b29",
+          "#484844",
+          "#666662",
+          "#868682",
+          "#a8a8a4",
+          "#cbcbc8",
+          "#eeeeed"
+        ]
+      },
+      "verde": {
+        "role": "primary",
+        "displayName": "Verde Boyacá",
+        "canonical": "oklch(42.0% 0.080 158.1)",
+        "tonalRamp": [
+          "#04160c",
+          "#0f3321",
+          "#1c5438",
+          "#3a7454",
+          "#5a9574",
+          "#83b597",
+          "#b1d5bf",
+          "#e0f4e8"
+        ]
+      },
+      "verde-hondo": {
+        "role": "primary",
+        "displayName": "Verde hondo",
+        "canonical": "oklch(33.1% 0.061 159.0)",
+        "tonalRamp": [
+          "#07150e",
+          "#183224",
+          "#2a513c",
+          "#467159",
+          "#669279",
+          "#8cb29c",
+          "#b7d2c2",
+          "#e4f3e9"
+        ]
+      },
+      "verde-claro": {
+        "role": "primary",
+        "displayName": "Verde claro (tiza)",
+        "canonical": "oklch(90.2% 0.020 154.9)",
+        "tonalRamp": [
+          "#0f1310",
+          "#262d28",
+          "#404b43",
+          "#5d6a61",
+          "#7d8a81",
+          "#a0aba3",
+          "#c5cdc7",
+          "#ebf0ec"
+        ]
+      },
+      "almagre": {
+        "role": "secondary",
+        "displayName": "Almagre (puerta colonial)",
+        "canonical": "oklch(46.8% 0.152 27.7)",
+        "tonalRamp": [
+          "#270303",
+          "#530c0a",
+          "#841815",
+          "#ac3931",
+          "#d25c51",
+          "#ef8579",
+          "#ffb4aa",
+          "#ffe2dc"
+        ]
+      },
+      "almagre-hondo": {
+        "role": "secondary",
+        "displayName": "Almagre hondo",
+        "canonical": "oklch(39.6% 0.127 27.7)",
+        "tonalRamp": [
+          "#240605",
+          "#4e1511",
+          "#7b2620",
+          "#a2443b",
+          "#c7655a",
+          "#e58c81",
+          "#f9b8af",
+          "#ffe4df"
+        ]
+      },
+      "aviso": {
+        "role": "tertiary",
+        "displayName": "Aviso (ocre)",
+        "canonical": "oklch(83.7% 0.132 85.9)",
+        "tonalRamp": [
+          "#1c0f00",
+          "#3f2600",
+          "#653f00",
+          "#875e00",
+          "#a97f00",
+          "#c8a24a",
+          "#e2c78e",
+          "#fcedcd"
+        ]
+      },
+      "tinta": {
+        "role": "neutral",
+        "displayName": "Tinta",
+        "canonical": "oklch(21.7% 0.006 106.9)",
+        "tonalRamp": [
+          "#121210",
+          "#2b2b29",
+          "#484845",
+          "#666663",
+          "#868682",
+          "#a8a8a4",
+          "#cbcbc8",
+          "#eeeeed"
+        ]
+      },
+      "tinta-suave": {
+        "role": "neutral",
+        "displayName": "Tinta suave",
+        "canonical": "oklch(40.4% 0.010 99.1)",
+        "tonalRamp": [
+          "#121210",
+          "#2c2b28",
+          "#494842",
+          "#676660",
+          "#878680",
+          "#a9a8a2",
+          "#cbcbc6",
+          "#efeeec"
+        ]
+      },
+      "blanco": {
+        "role": "neutral",
+        "displayName": "Blanco",
+        "canonical": "oklch(100% 0 0)",
+        "tonalRamp": [
+          "#121212",
+          "#2b2b2b",
+          "#484848",
+          "#666666",
+          "#868686",
+          "#a8a8a8",
+          "#cbcbcb",
+          "#ffffff"
+        ]
+      },
+      "crudo": {
+        "role": "neutral",
+        "displayName": "Lana cruda",
+        "canonical": "oklch(86.5% 0.022 85.9)",
+        "tonalRamp": [
+          "#13110d",
+          "#2f2b23",
+          "#4d473b",
+          "#6c6558",
+          "#8c8578",
+          "#ada79b",
+          "#cecac1",
+          "#f1eee9"
+        ]
+      },
+      "gris-claro": {
+        "role": "neutral",
+        "displayName": "Lana gris claro",
+        "canonical": "oklch(80.9% 0.012 84.6)",
+        "tonalRamp": [
+          "#13110f",
+          "#2d2b27",
+          "#4a4741",
+          "#69665e",
+          "#89867e",
+          "#aba7a0",
+          "#cdcac5",
+          "#f0eeeb"
+        ]
+      },
+      "oveja": {
+        "role": "neutral",
+        "displayName": "Gris oveja",
+        "canonical": "oklch(70.1% 0.014 82.4)",
+        "tonalRamp": [
+          "#13110f",
+          "#2e2b26",
+          "#4b4740",
+          "#6a655d",
+          "#8a867d",
+          "#aba79f",
+          "#cdcac4",
+          "#f0eeeb"
+        ]
+      },
+      "pardo": {
+        "role": "neutral",
+        "displayName": "Lana parda",
+        "canonical": "oklch(57.6% 0.041 66.9)",
+        "tonalRamp": [
+          "#17100a",
+          "#35291d",
+          "#564432",
+          "#76624d",
+          "#97826d",
+          "#b7a491",
+          "#d6c8ba",
+          "#f5ede5"
+        ]
+      },
+      "nogal": {
+        "role": "neutral",
+        "displayName": "Nogal",
+        "canonical": "oklch(40.2% 0.043 53.7)",
+        "tonalRamp": [
+          "#180f0a",
+          "#37271e",
+          "#594233",
+          "#7a604f",
+          "#9c806e",
+          "#bba292",
+          "#d9c6bb",
+          "#f7ece5"
+        ]
+      },
+      "negro-lana": {
+        "role": "neutral",
+        "displayName": "Negro lana",
+        "canonical": "oklch(25.6% 0.007 48.4)",
+        "tonalRamp": [
+          "#131110",
+          "#2d2b29",
+          "#4b4745",
+          "#6a6563",
+          "#8a8582",
+          "#aba7a4",
+          "#cdcac8",
+          "#f0eeed"
+        ]
+      }
+    },
+    "typographyMeta": {
+      "display": {
+        "displayName": "Display (nombre en la tabla)",
+        "purpose": "Piece name on the tabla; page h1 on inicio and ficha."
+      },
+      "display-catalogo": {
+        "displayName": "Display catálogo",
+        "purpose": "Catalog page h1."
+      },
+      "headline": {
+        "displayName": "Titular de sección",
+        "purpose": "Section titles."
+      },
+      "precio": {
+        "displayName": "Precio pintado",
+        "purpose": "Painted price on the tabla, tabular figures."
+      },
+      "title": {
+        "displayName": "Título",
+        "purpose": "Weaver names, detail headings, category plaques, price-list values."
+      },
+      "precio-etiqueta": {
+        "displayName": "Precio de etiqueta",
+        "purpose": "Price on product-card tags."
+      },
+      "body-lead": {
+        "displayName": "Texto destacado",
+        "purpose": "Workshop story paragraphs."
+      },
+      "body": {
+        "displayName": "Texto",
+        "purpose": "All running text, 60–62ch max."
+      },
+      "label": {
+        "displayName": "Rótulo",
+        "purpose": "Nav links, card names, legends, stock line."
+      },
+      "label-boton": {
+        "displayName": "Rótulo de botón",
+        "purpose": "Button labels."
+      },
+      "caption": {
+        "displayName": "Nota",
+        "purpose": "IVA note, consent text, photo-pending labels, card meta."
+      }
+    },
+    "shadows": [
+      {
+        "name": "doblez",
+        "value": "rgb(0 0 0 / 0.14) band, 9px tall, top edge (::before strip, or inset 0 9px 0 on swatches)",
+        "purpose": "Painted fold along the top of every wool surface (9px; 6px on phones; 12px on gallery). Not a cast shadow."
+      },
+      {
+        "name": "borde-pintado",
+        "value": "inset 0 0 0 2px",
+        "purpose": "Zero-blur painted outline on boton-borde (verde) and pagination cells (gris-claro, verde on hover)."
+      },
+      {
+        "name": "foco",
+        "value": "outline: 3px solid var(--almagre); outline-offset: 3px",
+        "purpose": "Global focus ring. On wool swatches over green: 3px #f0c35a (aviso)."
+      }
+    ],
+    "motion": [
+      {
+        "name": "despliegue-banda",
+        "value": "height 240ms cubic-bezier(0.16, 1, 0.3, 1)",
+        "purpose": "The only animation: a wool band unfolding in the pila. Removed under prefers-reduced-motion."
+      },
+      {
+        "name": "intencion-hover",
+        "value": "120ms",
+        "purpose": "Hover-intent delay before a band is chosen on hover-capable devices."
+      },
+      {
+        "name": "hover-banda",
+        "value": "filter: brightness(1.06)",
+        "purpose": "Closed band hover lift, no motion."
+      }
+    ],
+    "breakpoints": [
+      {
+        "name": "telefono",
+        "value": "600px"
+      },
+      {
+        "name": "menu",
+        "value": "760px"
+      },
+      {
+        "name": "apilado",
+        "value": "900px"
+      },
+      {
+        "name": "max",
+        "value": "1360px"
+      }
+    ],
+    "implementationNotes": [
+      "Tokens are the :root custom properties in prototype/styles.css today. They move to packages/ui as a Tailwind v4 @theme block (Spanish names verbatim) when the Next.js apps are built.",
+      "Fonts: the prototype uses a Google Fonts @import for Alfa Slab One and Hanken Grotesk 400–700; the apps must self-host them via next/font.",
+      "aviso (#f0c35a) and blanco (#fff) are hard-coded literals in the prototype; promote them to custom properties in packages/ui."
+    ]
+  },
+  "components": [
+    {
+      "name": "Botón de acción",
+      "kind": "button",
+      "refersTo": "boton-accion",
+      "description": "The only red: primary purchase/submit action.",
+      "html": "<button class=\"ds-boton-accion\" type=\"button\">Agregar al carrito</button>",
+      "css": ".ds-boton-accion{display:inline-flex;align-items:center;justify-content:center;gap:10px;min-height:52px;padding:0 24px;border:0;border-radius:0;cursor:pointer;font-family:'Hanken Grotesk', system-ui, sans-serif;font-weight:700;font-size:1rem;letter-spacing:0.01em;text-decoration:none;background:var(--almagre, #9e2b25);color:#fff;transition:background 160ms;} .ds-boton-accion:hover{background:var(--almagre-hondo, #7d211c);} .ds-boton-accion:focus-visible{outline:3px solid var(--almagre, #9e2b25);outline-offset:3px;} .ds-boton-accion:disabled{background:var(--oveja, #a39e95);color:var(--cal, #f4f4f1);cursor:not-allowed;}"
+    },
+    {
+      "name": "Botón claro",
+      "kind": "button",
+      "refersTo": "boton-claro",
+      "description": "Light secondary action on green boards.",
+      "html": "<div class=\"ds-fondo-verde\"><a class=\"ds-boton-claro\" href=\"#\">Ver todas las piezas</a></div>",
+      "css": ".ds-fondo-verde{background:var(--verde, #1e5a3c);padding:24px;} .ds-boton-claro{display:inline-flex;align-items:center;justify-content:center;gap:10px;min-height:52px;padding:0 24px;border:0;border-radius:0;cursor:pointer;font-family:'Hanken Grotesk', system-ui, sans-serif;font-weight:700;font-size:1rem;letter-spacing:0.01em;text-decoration:none;background:var(--cal, #f4f4f1);color:var(--verde-hondo, #143f2a);} .ds-boton-claro:hover{text-decoration:underline;} .ds-boton-claro:focus-visible{outline:3px solid var(--almagre, #9e2b25);outline-offset:3px;}"
+    },
+    {
+      "name": "Botón borde",
+      "kind": "button",
+      "refersTo": "boton-borde",
+      "description": "Secondary action on cal: painted 2px inset outline.",
+      "html": "<a class=\"ds-boton-borde\" href=\"#\">Conoce a la familia</a>",
+      "css": ".ds-boton-borde{display:inline-flex;align-items:center;justify-content:center;gap:10px;min-height:52px;padding:0 24px;border:0;border-radius:0;cursor:pointer;font-family:'Hanken Grotesk', system-ui, sans-serif;font-weight:700;font-size:1rem;letter-spacing:0.01em;text-decoration:none;background:transparent;color:var(--verde-hondo, #143f2a);box-shadow:inset 0 0 0 2px var(--verde, #1e5a3c);} .ds-boton-borde:hover{background:var(--verde, #1e5a3c);color:var(--cal, #f4f4f1);} .ds-boton-borde:focus-visible{outline:3px solid var(--almagre, #9e2b25);outline-offset:3px;}"
+    },
+    {
+      "name": "Letrero (navegación)",
+      "kind": "nav",
+      "refersTo": "letrero-nav",
+      "description": "Sticky green sign bar with slab brand, links and cart plaque.",
+      "html": "<header class=\"ds-letrero\"><a class=\"ds-marca\" href=\"#\">Telar Casa Carrillo</a><nav class=\"ds-nav\"><a href=\"#\" aria-current=\"page\">Ruanas</a><a href=\"#\">Prendas</a><a href=\"#\">Hamacas</a><a href=\"#\">La familia</a></nav><a class=\"ds-carrito\" href=\"#\"><svg viewBox=\"0 0 24 24\" width=\"18\" height=\"18\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"2\" stroke-linecap=\"square\" aria-hidden=\"true\"><path d=\"M5 8h14l-1 13H6L5 8Z\"/><path d=\"M9 8V6a3 3 0 0 1 6 0v2\"/></svg><span>Carrito</span> 0</a></header>",
+      "css": ".ds-letrero{display:flex;align-items:center;gap:32px;min-height:64px;padding:0 24px;background:var(--verde, #1e5a3c);color:var(--cal, #f4f4f1);font-family:'Hanken Grotesk', system-ui, sans-serif;} .ds-marca{font-family:'Alfa Slab One', Georgia, serif;font-size:1.4rem;letter-spacing:0.01em;color:inherit;text-decoration:none;margin-right:auto;white-space:nowrap;} .ds-nav{display:flex;gap:28px;} .ds-nav a{color:inherit;text-decoration:none;font-weight:600;font-size:0.95rem;padding:8px 0;} .ds-nav a:hover,.ds-nav a[aria-current]{text-decoration:underline;text-decoration-thickness:2px;text-underline-offset:0.2em;} .ds-nav a:focus-visible,.ds-carrito:focus-visible,.ds-marca:focus-visible{outline:3px solid var(--almagre, #9e2b25);outline-offset:3px;} .ds-carrito{display:inline-flex;align-items:center;gap:8px;background:var(--cal, #f4f4f1);color:var(--verde-hondo, #143f2a);font-weight:700;font-size:0.9rem;padding:8px 14px;text-decoration:none;}"
+    },
+    {
+      "name": "La tabla",
+      "kind": "card",
+      "refersTo": "tabla",
+      "description": "Signature painted price board: name, weaver, painted price, stock, action.",
+      "html": "<aside class=\"ds-tabla\"><h3>Ruana de lana virgen gris oveja</h3><p class=\"ds-tejedor\">Tejida en telar por <a href=\"#\">[nombre del tejedor]</a></p><p class=\"ds-precio\">$ 289.000</p><p class=\"ds-iva\">IVA incluido · Envío a toda Colombia</p><p class=\"ds-existencias\">Quedan 3</p><button class=\"ds-tabla-accion\" type=\"button\">Agregar al carrito</button></aside>",
+      "css": ".ds-tabla{background:var(--verde, #1e5a3c);color:var(--cal, #f4f4f1);padding:32px;display:flex;flex-direction:column;gap:14px;max-width:440px;transform:rotate(-1deg);transform-origin:top right;font-family:'Hanken Grotesk', system-ui, sans-serif;} .ds-tabla h3{margin:0;font-family:'Alfa Slab One', Georgia, serif;font-weight:400;font-size:2.8rem;line-height:1;letter-spacing:-0.01em;text-wrap:balance;} .ds-tabla p{margin:0;} .ds-tejedor{font-size:1.05rem;} .ds-tejedor a{color:inherit;font-weight:700;} .ds-precio{font-family:'Alfa Slab One', Georgia, serif;font-size:2.6rem;line-height:1;font-variant-numeric:tabular-nums;} .ds-iva{font-size:0.85rem;color:var(--verde-claro, #d5e3d9);} .ds-existencias{display:flex;align-items:center;gap:8px;font-size:0.95rem;font-weight:600;} .ds-existencias::before{content:\"\";width:10px;height:10px;background:#f0c35a;} .ds-tabla-accion{display:inline-flex;align-items:center;justify-content:center;gap:10px;min-height:52px;padding:0 24px;border:0;border-radius:0;cursor:pointer;font-family:'Hanken Grotesk', system-ui, sans-serif;font-weight:700;font-size:1rem;letter-spacing:0.01em;text-decoration:none;width:100%;margin-top:6px;background:var(--almagre, #9e2b25);color:#fff;} .ds-tabla-accion:hover{background:var(--almagre-hondo, #7d211c);} .ds-tabla-accion:focus-visible{outline:3px solid var(--almagre, #9e2b25);outline-offset:3px;}"
+    },
+    {
+      "name": "La pila (bandas de lana)",
+      "kind": "custom",
+      "refersTo": "banda",
+      "description": "Stack of wool bands; choosing one unfolds it (240ms) and repaints the tabla.",
+      "html": "<ul class=\"ds-pila\"><li><button class=\"ds-banda ds-ruana\" aria-pressed=\"true\" style=\"--lana:#a39e95;--letra:#1a1a17\"><span class=\"ds-rotulo\">Ruana gris oveja<small>Ruanas · $ 289.000</small></span></button></li><li><button class=\"ds-banda ds-ruana\" aria-pressed=\"false\" style=\"--lana:#5b4232\"><span class=\"ds-rotulo\">Ruana teñida con nogal<small>Ruanas · $ 319.000</small></span></button></li><li><button class=\"ds-banda ds-hamaca\" aria-pressed=\"false\" style=\"--lana:#d9d2c3;--lana-2:#1e5a3c;--letra:#1a1a17\"><span class=\"ds-rotulo\">Hamaca doble en algodón crudo<small>Hamacas · $ 420.000</small></span></button></li></ul>",
+      "css": ".ds-pila{list-style:none;margin:0;padding:0;display:flex;flex-direction:column;gap:6px;font-family:'Hanken Grotesk', system-ui, sans-serif;} .ds-banda{position:relative;display:block;width:100%;height:72px;border:0;border-radius:0;padding:0;cursor:pointer;text-align:left;background:var(--lana);color:var(--letra, #f4f4f1);overflow:hidden;transition:height 240ms cubic-bezier(0.16,1,0.3,1);} .ds-banda::before{content:\"\";position:absolute;left:0;right:0;top:0;height:9px;background:rgb(0 0 0 / 0.14);} .ds-ruana::after{content:\"\";position:absolute;top:9px;bottom:0;right:0;width:22px;background:repeating-linear-gradient(180deg,var(--lana) 0 3px,transparent 3px 6px);filter:brightness(0.82);} .ds-hamaca{background:repeating-linear-gradient(180deg,var(--lana) 0 14px,var(--lana-2) 14px 22px);} .ds-rotulo{position:absolute;left:12px;bottom:8px;background:var(--lana);padding:4px 8px;font-weight:700;font-size:0.95rem;} .ds-rotulo small{display:block;font-weight:500;font-size:0.8rem;opacity:0.85;} .ds-banda[aria-pressed=\"true\"]{height:220px;cursor:default;} .ds-banda:hover:not([aria-pressed=\"true\"]){filter:brightness(1.06);} .ds-banda:focus-visible{outline:3px solid var(--almagre, #9e2b25);outline-offset:3px;} @media (prefers-reduced-motion: reduce){.ds-banda{transition:none;}}"
+    },
+    {
+      "name": "Pieza (tarjeta de producto)",
+      "kind": "card",
+      "refersTo": "pieza-etiqueta",
+      "description": "Wool-painted 4:5 photo with doblez and an overlapping green price tag.",
+      "html": "<a class=\"ds-pieza\" href=\"#\"><div class=\"ds-foto\" style=\"--lana:#5b4232\"><span>[Foto real: ruana teñida con nogal]</span></div><div class=\"ds-etiqueta\"><strong>$ 319.000</strong><s>$ 349.000</s></div><h4>Ruana teñida con nogal</h4><p>Disponible · Tejida por [nombre]</p></a>",
+      "css": ".ds-pieza{display:block;max-width:260px;text-decoration:none;color:var(--tinta, #1a1a17);font-family:'Hanken Grotesk', system-ui, sans-serif;} .ds-foto{position:relative;aspect-ratio:4/5;background:var(--lana);display:grid;place-items:center;padding:12px;text-align:center;font-size:0.78rem;font-weight:600;} .ds-foto::before{content:\"\";position:absolute;left:0;right:0;top:0;height:9px;background:rgb(0 0 0 / 0.14);} .ds-foto span{background:rgb(26 26 23 / 0.55);color:var(--cal, #f4f4f1);padding:4px 8px;} .ds-etiqueta{position:relative;margin:-28px 12px 0;background:var(--verde, #1e5a3c);color:var(--cal, #f4f4f1);padding:10px 12px;display:flex;justify-content:space-between;align-items:baseline;gap:8px;} .ds-etiqueta strong{font-family:'Alfa Slab One', Georgia, serif;font-weight:400;font-size:1.2rem;font-variant-numeric:tabular-nums;} .ds-etiqueta s{font-size:0.8rem;color:var(--verde-claro, #d5e3d9);} .ds-pieza h4{margin:12px 0 0;font-size:1rem;font-weight:700;line-height:1.3;} .ds-pieza p{margin:0;font-size:0.9rem;color:var(--tinta-suave, #4a4943);} .ds-pieza:hover h4{text-decoration:underline;} .ds-pieza:focus-visible{outline:3px solid var(--almagre, #9e2b25);outline-offset:3px;}"
+    },
+    {
+      "name": "Campo y buscador",
+      "kind": "input",
+      "refersTo": "campo",
+      "description": "Square white fields with 2px stroke; search fused to a green icon button.",
+      "html": "<div class=\"ds-campos\"><label class=\"ds-campo\">Precio mínimo<input type=\"number\" placeholder=\"100000\"></label><form class=\"ds-buscar\" onsubmit=\"return false\"><input type=\"search\" placeholder=\"Buscar ruanas, hamacas…\" aria-label=\"Buscar\"><button type=\"submit\" aria-label=\"Buscar\"><svg viewBox=\"0 0 24 24\" width=\"20\" height=\"20\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"2\" stroke-linecap=\"square\" aria-hidden=\"true\"><circle cx=\"11\" cy=\"11\" r=\"6\"/><path d=\"m20 20-4.5-4.5\"/></svg></button></form></div>",
+      "css": ".ds-campos{display:grid;gap:16px;max-width:360px;font-family:'Hanken Grotesk', system-ui, sans-serif;color:var(--tinta, #1a1a17);} .ds-campo{display:grid;gap:6px;font-size:0.85rem;font-weight:600;} .ds-campo input{min-height:44px;padding:0 12px;border:2px solid var(--gris-claro, #c4c0b8);border-radius:0;background:#fff;font:inherit;font-weight:400;font-size:1rem;} .ds-campo input:focus{border-color:var(--verde, #1e5a3c);outline:none;} .ds-buscar{display:flex;} .ds-buscar input{flex:1;min-width:0;min-height:48px;padding:0 14px;border:2px solid var(--verde, #1e5a3c);border-radius:0;background:#fff;font:inherit;} .ds-buscar input:focus-visible{outline:3px solid var(--almagre, #9e2b25);outline-offset:3px;} .ds-buscar button{min-width:48px;border:0;background:var(--verde, #1e5a3c);color:var(--cal, #f4f4f1);display:grid;place-items:center;cursor:pointer;} .ds-buscar button:focus-visible{outline:3px solid var(--almagre, #9e2b25);outline-offset:3px;}"
+    },
+    {
+      "name": "Letrero de categoría",
+      "kind": "card",
+      "refersTo": "letrero-cat-placa",
+      "description": "Wool-painted sign with a green slab-lettered plaque at its foot.",
+      "html": "<a class=\"ds-letrero-cat\" href=\"#\" style=\"--lana:#8a7560\"><span class=\"ds-placa\"><strong>Prendas</strong><span>Chales, ponchos y bufandas</span></span></a>",
+      "css": ".ds-letrero-cat{display:flex;flex-direction:column;justify-content:flex-end;min-height:260px;max-width:320px;padding:20px;background:var(--lana);color:var(--cal, #f4f4f1);text-decoration:none;font-family:'Hanken Grotesk', system-ui, sans-serif;} .ds-placa{background:var(--verde, #1e5a3c);padding:14px 16px;transition:background 160ms;} .ds-placa strong{display:block;font-family:'Alfa Slab One', Georgia, serif;font-weight:400;font-size:1.8rem;line-height:1.05;} .ds-placa span{font-size:0.9rem;color:var(--verde-claro, #d5e3d9);} .ds-letrero-cat:hover .ds-placa{background:var(--verde-hondo, #143f2a);} .ds-letrero-cat:focus-visible{outline:3px solid var(--almagre, #9e2b25);outline-offset:3px;}"
+    },
+    {
+      "name": "Zócalo",
+      "kind": "custom",
+      "refersTo": "zocalo",
+      "description": "Green skirting band that closes the first screen and the page.",
+      "html": "<div class=\"ds-zocalo\" aria-hidden=\"true\"></div>",
+      "css": ".ds-zocalo{height:40px;background:var(--verde, #1e5a3c);border-top:6px solid var(--verde-hondo, #143f2a);}"
+    }
+  ],
+  "narrative": {
+    "northStar": "El puesto de la plaza",
+    "overview": "The store is the workshop's stall in the town square: a cold whitewashed wall, boards and a skirting band painted in Boyacá green, folded ruanas stacked by wool color, and hand-lettered signs that say what the piece is, who wove it and what it costs. Everything is flat paint with straight brush edges. Color comes from two places only: the painted green of the stall and the undyed wool of the pieces themselves. A single colonial-door red is reserved for the act of buying.\n\nDensity is generous but not airy: sections breathe on a large vertical rhythm, while the painted boards (tabla, etiqueta, placa, tablero) are compact and dense like real signage. Headlines and prices are lettered in a heavy slab; everything a shopper reads to decide is set in a sober grotesk. Green carries a large share of every screen (nav, boards, family band, price board, skirting, footer), so it reads as architecture, not accent.\n\nThe world rejects soft depth (drop shadows, blurred gradients, glass), rounded corners, and the stock e-commerce hero of headline-over-photo.",
+    "keyCharacteristics": [
+      "Whitewash floor (`cal`), never cream or beige.",
+      "Boyacá green as structure: boards, sign bars and the zócalo band that closes screens and the page.",
+      "Undyed wool tones as product color: every piece and placeholder is painted in its own wool (`--lana`).",
+      "One red (`almagre`) for actions only.",
+      "Square everything: zero radius, flat fills, hard stops.",
+      "Slab-lettered names and prices with tabular figures; grotesk for the rest."
+    ],
+    "rules": [
+      {
+        "name": "The One Door Rule",
+        "body": "Almagre is the action and nothing else: primary buttons and the focus ring. Never a heading, a border, a badge or decoration.",
+        "section": "colors"
+      },
+      {
+        "name": "The Wool Is the Color Rule",
+        "body": "Product surfaces (bands, card photos, category signs, swatches, gallery) take their fill from the piece's own wool via `--lana`, never from the UI palette. When real photos arrive they replace the fill; the wool stays as the loading/background color.",
+        "section": "colors"
+      },
+      {
+        "name": "The Painted Board Rule",
+        "body": "Green is architecture, carrying roughly 30–50% of a screen. Text on green is `cal` (primary) or `verde-claro` (secondary), never `tinta`.",
+        "section": "colors"
+      },
+      {
+        "name": "The Painted Price Rule",
+        "body": "Every price is in the slab with tabular figures, formatted `$ 289.000` (es-CO). When a piece is sold out the price is replaced by \"Agotada\" in Hanken 700, not a struck slab.",
+        "section": "typography"
+      },
+      {
+        "name": "The No Small Caps Rule",
+        "body": "No uppercase tracking labels, kickers or eyebrows above titles; the sign says the thing directly.",
+        "section": "typography"
+      },
+      {
+        "name": "The Zócalo Rule",
+        "body": "A green skirting band (`zocalo` height, 6px `verde-hondo` top edge) closes the first screen and sits above the footer. It is the stall's wall base, not a divider; use it only to close a screen or the page.",
+        "section": "layout"
+      },
+      {
+        "name": "The Paint, Not Light Rule",
+        "body": "Depth is a darker flat band or an overlap, never a cast shadow or a blurred gradient.",
+        "section": "elevation"
+      }
+    ],
+    "dos": [
+      "**Do** paint every product surface with the piece's own wool through `--lana`, with the 9px doblez on top.",
+      "**Do** keep primary actions `almagre` with white text, square, 52px tall, and nothing else red.",
+      "**Do** set names and prices in Alfa Slab One 400 with tabular figures, and the rest in Hanken Grotesk.",
+      "**Do** close the first screen and the page with the zócalo (green band, 6px `verde-hondo` top edge).",
+      "**Do** use `cal` and `verde-claro` for text on green, and keep focus visible (3px `almagre`, or `aviso` where almagre sits on green).",
+      "**Do** keep tap targets at 44px or more and long text at 60–62ch.",
+      "**Do** honor `prefers-reduced-motion`: the band unfold becomes instant."
+    ],
+    "donts": [
+      "**Don't** round corners; every radius is 0.",
+      "**Don't** use drop shadows, blurred or smooth gradients, or glass effects; hard-stop stripes for flecos and hamaca weave are the only gradients allowed.",
+      "**Don't** use a cream or beige ground; the wall is cold `cal`.",
+      "**Don't** put a headline over a full-bleed photo or line up identical cards as the first screen.",
+      "**Don't** add uppercase kickers or eyebrows above titles.",
+      "**Don't** scatter animation; the only motion is the 240ms band unfold.",
+      "**Don't** fill an image or text slot with invented people, testimonials or history; use the marked placeholder."
+    ]
+  }
+}

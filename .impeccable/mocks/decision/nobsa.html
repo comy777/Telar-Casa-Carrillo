@@ -1,0 +1,25 @@
+<!doctype html>
+<html lang="es"><head><meta charset="utf-8"><title>Plaza de Nobsa — boceto</title>
+<link href="https://fonts.googleapis.com/css2?family=Alfa+Slab+One&family=Hanken+Grotesk:wght@400;600&display=swap" rel="stylesheet">
+<style>
+:root{--crudo:#e6ddcb;--gris:#9a958c;--nogal:#5a3f2c;--negro:#1d1a17;--verde:#2f5d3a}
+*{box-sizing:border-box;margin:0}
+body{width:1440px;height:900px;overflow:hidden;font-family:'Hanken Grotesk',sans-serif;background:var(--crudo);color:var(--negro)}
+nav{height:72px;display:flex;align-items:center;gap:36px;padding:0 56px;border-bottom:3px solid var(--negro);font-size:16px}
+nav b{font-family:'Alfa Slab One';font-size:28px;margin-right:auto}
+.pila{position:absolute;left:56px;top:120px;width:760px;display:grid;gap:6px}
+.pila div{height:92px}
+.pila div:nth-child(1){background:var(--gris)}.pila div:nth-child(2){background:var(--nogal)}.pila div:nth-child(3){background:#d8cdb6}
+.pila div:nth-child(4){background:var(--negro)}.pila div:nth-child(5){background:#7b6a58}.pila div:nth-child(6){background:#b9ae9a}
+.letrero{position:absolute;left:880px;top:130px;width:500px;background:var(--verde);color:#fff;padding:36px;transform:rotate(-1.5deg)}
+.letrero h1{font-family:'Alfa Slab One';font-size:64px;line-height:1}
+.letrero p{margin-top:16px;font-size:18px}
+.letrero .precio{font-family:'Alfa Slab One';font-size:44px;margin-top:20px}
+.letrero button{margin-top:24px;height:52px;width:100%;border:3px solid #fff;background:transparent;color:#fff;font-size:16px;font-weight:600}
+.cap{position:absolute;left:56px;top:720px;font-size:14px}
+</style></head><body>
+<nav><b>Telar Casa Carrillo</b><span>Ruanas</span><span>Hamacas</span><span>La familia</span><span>Carrito (0)</span></nav>
+<div class="pila"><div></div><div></div><div></div><div></div><div></div><div></div></div>
+<div class="letrero"><h1>Ruanas de lana, hechas en casa</h1><p>Tejidas por la familia Carrillo</p><div class="precio">$ 000.000</div><button>Agregar al carrito</button></div>
+<div class="cap">[Foto real: ruanas dobladas, apiladas por color de lana]</div>
+</body></html>

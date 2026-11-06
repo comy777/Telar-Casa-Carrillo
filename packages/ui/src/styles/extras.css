@@ -1,0 +1,75 @@
+/* Estados y formularios que el prototipo no cubría, en la misma gramática. */
+@layer components {
+  .boton-verde { background: var(--verde); color: var(--cal); }
+  .boton-verde:hover { background: var(--verde-hondo); }
+  .boton-texto { background: transparent; color: var(--verde-hondo); min-height: 44px; padding: 0 8px; text-decoration: underline; text-decoration-thickness: 1px; }
+  .boton-texto:hover { text-decoration-thickness: 2px; }
+  .boton-peligro { background: transparent; color: var(--almagre); box-shadow: inset 0 0 0 2px var(--almagre); }
+  .boton-peligro:hover { background: var(--almagre); color: #fff; }
+  .boton:disabled { cursor: not-allowed; opacity: 0.7; }
+  .boton-borde:disabled, .boton-claro:disabled { opacity: 0.5; }
+
+  /* Cargando: un hilo que se teje de lado a lado */
+  .hilo-carga { width: 18px; height: 3px; background: currentColor; animation: hilo 0.9s var(--ease-despliegue) infinite alternate; transform-origin: left; }
+  @keyframes hilo { from { transform: scaleX(0.2); } to { transform: scaleX(1); } }
+
+  .campo label { font-weight: 600; font-size: 0.9rem; }
+  .campo textarea { min-height: 120px; padding: 10px 12px; border: 2px solid var(--gris-claro); background: #fff; font-size: 1rem; resize: vertical; }
+  .campo textarea:focus { border-color: var(--verde); outline: none; }
+  .campo input, .campo select, .campo textarea { width: 100%; color: var(--tinta); }
+  .campo.con-error input, .campo.con-error select, .campo.con-error textarea { border-color: var(--almagre); }
+  .campo-ayuda { font-weight: 400; font-size: 0.85rem; color: var(--tinta-suave); }
+  .campo-error { font-weight: 600; font-size: 0.85rem; color: var(--almagre); }
+  .tabla .campo label, .tabla .campo-ayuda { color: var(--verde-claro); }
+  .tabla .campo-error { color: var(--aviso); }
+
+  .casilla label { display: flex; align-items: flex-start; gap: 10px; cursor: pointer; font-size: 0.95rem; }
+  .casilla input { width: 18px; height: 18px; margin-top: 3px; flex: none; accent-color: var(--verde); }
+
+  .formulario { display: grid; gap: 18px; }
+  .formulario .fila-2 { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; }
+  @media (max-width: 600px) { .formulario .fila-2 { grid-template-columns: 1fr; } }
+
+  .aviso { display: flex; gap: 12px; align-items: flex-start; padding: 14px 16px; font-size: 0.95rem; }
+  .aviso svg { flex: none; margin-top: 2px; }
+  .aviso-info { background: var(--verde-claro); color: var(--verde-hondo); }
+  .aviso-error { background: #f6dedc; color: var(--almagre-hondo); }
+  .aviso-exito { background: var(--verde-claro); color: var(--verde-hondo); }
+
+  .estado-vacio { display: grid; justify-items: start; gap: 14px; padding: clamp(32px, 6vw, 72px) 0; max-width: 560px; }
+  .estado-vacio h2 { font-family: var(--display); font-weight: 400; font-size: clamp(1.6rem, 3vw, 2.2rem); line-height: 1.05; }
+  .estado-vacio-texto { color: var(--tinta-suave); }
+  .pila-vacia { display: grid; gap: 4px; width: 120px; }
+  .pila-vacia span { height: 14px; background: var(--cal-sombra); box-shadow: inset 0 4px 0 rgb(0 0 0 / 0.06); }
+  .pila-vacia span:nth-child(2) { width: 85%; }
+  .pila-vacia span:nth-child(3) { width: 70%; }
+
+  .esqueleto { display: block; background: var(--cal-sombra); min-height: 1em; animation: respira 1.4s ease-in-out infinite alternate; }
+  @keyframes respira { from { opacity: 1; } to { opacity: 0.55; } }
+
+  .existencias.agotada::before { background: var(--oveja); }
+  .cantidad button:disabled { opacity: 0.35; cursor: not-allowed; }
+  .cantidad button { display: grid; place-items: center; }
+  .boton .hilo-carga { margin-right: 4px; }
+
+  /* Fotos reales: mismo doblez de lana encima */
+  .foto-real { position: relative; overflow: hidden; background: var(--lana, var(--cal-sombra)); }
+  .foto-real img { width: 100%; height: 100%; object-fit: cover; }
+  .foto-real::after { content: ""; position: absolute; left: 0; right: 0; top: 0; height: 9px; background: rgb(0 0 0 / 0.14); pointer-events: none; }
+
+  /* Diálogos y paneles laterales */
+  .velo { position: fixed; inset: 0; background: rgb(26 26 23 / 0.45); z-index: 40; }
+  .panel-lateral { position: fixed; top: 0; right: 0; bottom: 0; width: min(440px, 100vw); background: var(--cal); z-index: 41; display: flex; flex-direction: column; box-shadow: -12px 0 40px rgb(26 26 23 / 0.18); }
+  .panel-lateral > header { background: var(--verde); color: var(--cal); display: flex; align-items: center; justify-content: space-between; padding: 16px 20px; }
+  .panel-lateral > header h2 { font-family: var(--display); font-weight: 400; font-size: 1.5rem; }
+  .panel-lateral > header button { background: none; border: 0; color: inherit; min-width: 44px; min-height: 44px; display: grid; place-items: center; cursor: pointer; }
+  .panel-lateral .cuerpo { flex: 1; overflow: auto; padding: 20px; }
+  .panel-lateral > footer { padding: 20px; border-top: 6px solid var(--verde); display: grid; gap: 12px; }
+
+  .titulo-pagina { font-family: var(--display); font-weight: 400; font-size: clamp(2.2rem, 5vw, 4rem); line-height: 1; text-wrap: balance; }
+  .prosa { max-width: 68ch; font-size: 1.05rem; }
+  .prosa > * + * { margin-top: 1em; }
+  .prosa h2 { font-family: var(--display); font-weight: 400; font-size: 1.6rem; line-height: 1.1; margin-top: 1.6em; }
+  .prosa h3 { font-weight: 700; font-size: 1.15rem; margin-top: 1.4em; }
+  .prosa ul, .prosa ol { padding-left: 1.3em; }
+}

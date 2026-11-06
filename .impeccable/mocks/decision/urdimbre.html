@@ -1,0 +1,28 @@
+<!doctype html>
+<html lang="es"><head><meta charset="utf-8"><title>Urdimbre — boceto</title>
+<link href="https://fonts.googleapis.com/css2?family=Big+Shoulders+Display:wght@700;900&family=Hanken+Grotesk:wght@400;600&display=swap" rel="stylesheet">
+<style>
+:root{--anil:#1c2850;--hilo:#2e3f74;--cochinilla:#b3214e;--oveja:#cfd1cc;--nogal:#4a3426;--tinta:#10162c}
+*{box-sizing:border-box;margin:0}
+body{width:1440px;height:900px;overflow:hidden;font-family:'Hanken Grotesk',sans-serif;color:var(--oveja);
+ background:var(--anil) repeating-linear-gradient(90deg,transparent 0 10px,var(--hilo) 10px 12px)}
+nav{position:absolute;top:0;left:0;right:0;height:64px;background:var(--tinta);display:flex;align-items:center;gap:40px;padding:0 64px;font-size:15px;letter-spacing:.06em;text-transform:uppercase}
+nav b{font-family:'Big Shoulders Display';font-size:26px;letter-spacing:.02em;margin-right:auto;text-transform:none}
+.foto{position:absolute;left:760px;top:64px;width:560px;height:836px;background:#7d7466;
+ -webkit-mask:repeating-linear-gradient(90deg,#000 0 10px,rgba(0,0,0,.55) 10px 12px)}
+.foto span{position:absolute;bottom:24px;left:24px;font-size:13px;background:var(--tinta);padding:6px 10px}
+h1{position:absolute;left:64px;top:150px;width:720px;font-family:'Big Shoulders Display';font-weight:900;font-size:132px;line-height:.86;color:#fff;text-transform:uppercase}
+.pasada{position:absolute;left:0;right:0;top:600px;height:6px;background:var(--cochinilla)}
+.num{position:absolute;left:64px;top:560px;font-size:13px;letter-spacing:.2em}
+.ficha{position:absolute;left:64px;top:640px;width:560px;background:var(--oveja);color:var(--tinta);padding:24px 28px;display:grid;grid-template-columns:1fr auto;gap:8px 24px}
+.ficha h2{font-size:22px}.ficha p{font-size:15px}.precio{font-size:26px;font-weight:600}
+.ficha button{grid-column:1/-1;margin-top:12px;height:52px;border:0;background:var(--cochinilla);color:#fff;font-size:16px;font-weight:600;letter-spacing:.04em}
+</style></head><body>
+<nav><b>Telar Casa Carrillo</b><span>Ruanas</span><span>Hamacas</span><span>La familia</span><span>Carrito (0)</span></nav>
+<h1>Tejido en telar, pasada por pasada</h1>
+<div class="foto"><span>[Foto real: ruana en el telar]</span></div>
+<div class="num">PASADA 01 · LA PIEZA DE LA SEMANA</div>
+<div class="pasada"></div>
+<div class="ficha"><h2>Ruana de lana virgen, gris oveja</h2><span class="precio">$ 000.000</span>
+<p>Tejida por [nombre del artesano] · Quedan 3</p><button>Agregar al carrito</button></div>
+</body></html>

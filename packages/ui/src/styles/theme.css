@@ -1,0 +1,80 @@
+/*
+ * Telar Casa Carrillo — tokens del mundo «Plaza de Nobsa» (ver DESIGN.md).
+ * Se importa después de `@import "tailwindcss"` en cada app. Las fuentes llegan
+ * autoalojadas por next/font como variables --font-alfa y --font-hanken.
+ */
+@theme {
+  --color-cal: #f4f4f1;
+  --color-cal-sombra: #e7e7e2;
+  --color-verde: #1e5a3c;
+  --color-verde-hondo: #143f2a;
+  --color-verde-claro: #d5e3d9;
+  --color-almagre: #9e2b25;
+  --color-almagre-hondo: #7d211c;
+  --color-tinta: #1a1a17;
+  --color-tinta-suave: #4a4943;
+  --color-blanco: #ffffff;
+  --color-aviso: #f0c35a;
+  --color-crudo: #d9d2c3;
+  --color-gris-claro: #c4c0b8;
+  --color-oveja: #a39e95;
+  --color-pardo: #8a7560;
+  --color-nogal: #5b4232;
+  --color-negro-lana: #262220;
+
+  --font-display: var(--font-alfa), Georgia, serif;
+  --font-sans: var(--font-hanken), system-ui, sans-serif;
+
+  --radius-*: initial;
+  --radius-none: 0px;
+
+  --breakpoint-sm: 600px;
+  --breakpoint-md: 760px;
+  --breakpoint-lg: 900px;
+
+  --ease-despliegue: cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+@layer base {
+  :root {
+    /* Alias cortos que usan las clases de componentes */
+    --cal: var(--color-cal);
+    --cal-sombra: var(--color-cal-sombra);
+    --verde: var(--color-verde);
+    --verde-hondo: var(--color-verde-hondo);
+    --verde-claro: var(--color-verde-claro);
+    --almagre: var(--color-almagre);
+    --almagre-hondo: var(--color-almagre-hondo);
+    --tinta: var(--color-tinta);
+    --tinta-suave: var(--color-tinta-suave);
+    --aviso: var(--color-aviso);
+    --crudo: var(--color-crudo);
+    --oveja: var(--color-oveja);
+    --gris-claro: var(--color-gris-claro);
+    --pardo: var(--color-pardo);
+    --nogal: var(--color-nogal);
+    --negro-lana: var(--color-negro-lana);
+    --display: var(--font-display);
+    --texto: var(--font-sans);
+    --gutter: clamp(16px, 4vw, 56px);
+    --max: 1360px;
+    --paso: 8px;
+  }
+
+  html { -webkit-text-size-adjust: 100%; scroll-behavior: smooth; scrollbar-color: var(--verde) var(--cal-sombra); }
+  body {
+    font-family: var(--texto);
+    font-size: 1rem;
+    line-height: 1.55;
+    color: var(--tinta);
+    background: var(--cal);
+    -webkit-font-smoothing: antialiased;
+  }
+  a { color: inherit; text-underline-offset: 0.2em; text-decoration-thickness: 1px; }
+  ::selection { background: var(--verde); color: var(--cal); }
+  :focus-visible { outline: 3px solid var(--almagre); outline-offset: 3px; }
+  .bg-verde :focus-visible, .tabla :focus-visible, .letrero-nav :focus-visible { outline-color: var(--aviso); }
+  @media (prefers-reduced-motion: reduce) {
+    *, *::before, *::after { transition: none !important; animation: none !important; scroll-behavior: auto !important; }
+  }
+}

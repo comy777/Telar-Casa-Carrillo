@@ -1,0 +1,54 @@
+{
+  "name": "telar-casa-carrillo",
+  "private": true,
+  "description": "Storefront y panel administrativo de Telar Casa Carrillo (Next.js)",
+  "homepage": "https://github.com/comy777/Telar-Casa-Carrillo#readme",
+  "bugs": {
+    "url": "https://github.com/comy777/Telar-Casa-Carrillo/issues"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/comy777/Telar-Casa-Carrillo.git"
+  },
+  "license": "UNLICENSED",
+  "engines": {
+    "node": ">=22"
+  },
+  "workspaces": [
+    "apps/*",
+    "packages/*"
+  ],
+  "scripts": {
+    "dev": "npm run dev --workspaces --if-present",
+    "dev:tienda": "npm run dev -w @telar/storefront",
+    "dev:admin": "npm run dev -w @telar/admin",
+    "build": "npm run build -w @telar/storefront && npm run build -w @telar/admin",
+    "api:generate": "npm run generate -w @telar/api-client",
+    "api:check": "npm run check -w @telar/api-client",
+    "lint": "eslint .",
+    "typecheck": "npm run typecheck --workspaces --if-present",
+    "test": "vitest run",
+    "e2e": "playwright test",
+    "format": "prettier --write ."
+  },
+  "devDependencies": {
+    "@eslint/js": "^10.0.0",
+    "@playwright/test": "1.65.0",
+    "@axe-core/playwright": "^4.10.0",
+    "@testing-library/jest-dom": "^6.6.0",
+    "@testing-library/react": "16.3.3",
+    "@testing-library/user-event": "^14.6.0",
+    "@types/node": "^22.0.0",
+    "@types/react": "^19.0.0",
+    "@types/react-dom": "^19.0.0",
+    "@vitejs/plugin-react": "6.2.1",
+    "eslint": "10.14.0",
+    "eslint-config-next": "16.4.5",
+    "jsdom": "31.0.0",
+    "msw": "3.0.4",
+    "prettier": "3.9.10",
+    "typescript": "5.9.3",
+    "typescript-eslint": "^8.40.0",
+    "vitest": "5.1.0"
+  }
+}

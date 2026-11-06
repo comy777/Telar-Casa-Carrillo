@@ -1,0 +1,81 @@
+<!doctype html>
+<html lang="es-CO">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Ruanas, prendas y hamacas · Telar Casa Carrillo</title>
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body data-pagina="catalogo.html">
+  <div data-encabezado></div>
+
+  <main class="envoltura">
+    <p class="migas"><a href="index.html">Inicio</a> / Catálogo</p>
+    <div class="catalogo-cabeza">
+      <div>
+        <h1>Todas las piezas</h1>
+        <p>Ruanas, prendas y hamacas tejidas en telar por la familia Carrillo.</p>
+      </div>
+      <form class="buscar" role="search" onsubmit="event.preventDefault()">
+        <label class="sr" for="q">Buscar piezas</label>
+        <input id="q" type="search" placeholder="Buscar: ruana gris, hamaca doble…">
+        <button type="submit" aria-label="Buscar"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="square" aria-hidden="true"><circle cx="11" cy="11" r="6"/><path d="m20 20-4.5-4.5"/></svg></button>
+      </form>
+    </div>
+
+    <div class="catalogo">
+      <form class="filtros" id="filtros" aria-label="Filtros" onsubmit="event.preventDefault()">
+        <fieldset>
+          <legend>Categoría</legend>
+          <label><input type="checkbox" checked> Ruanas</label>
+          <label><input type="checkbox" checked> Prendas</label>
+          <label><input type="checkbox" checked> Hamacas</label>
+        </fieldset>
+        <fieldset>
+          <legend>Precio</legend>
+          <div class="rango">
+            <label class="campo">Desde<input type="number" inputmode="numeric" placeholder="$ 0"></label>
+            <label class="campo">Hasta<input type="number" inputmode="numeric" placeholder="$ 500.000"></label>
+          </div>
+        </fieldset>
+        <fieldset>
+          <legend>Disponibilidad</legend>
+          <label><input type="checkbox"> Solo piezas disponibles</label>
+        </fieldset>
+        <fieldset>
+          <legend>Tejida por</legend>
+          <label><input type="checkbox"> <span class="marcador">[Tejedor 1]</span></label>
+          <label><input type="checkbox"> <span class="marcador">[Tejedor 2]</span></label>
+        </fieldset>
+      </form>
+
+      <section aria-labelledby="t-resultados">
+        <h2 class="sr" id="t-resultados">Resultados</h2>
+        <div class="barra-resultados">
+          <span class="conteo">8 piezas</span>
+          <button class="boton boton-borde filtros-movil" type="button" aria-expanded="false" aria-controls="filtros">Filtrar</button>
+          <label class="campo" style="grid-auto-flow:column;align-items:center;gap:10px">Ordenar
+            <select>
+              <option>Más recientes</option>
+              <option>Precio: menor a mayor</option>
+              <option>Precio: mayor a menor</option>
+            </select>
+          </label>
+        </div>
+        <ul class="piezas" data-piezas="todas"></ul>
+        <nav aria-label="Páginas">
+          <ul class="paginacion">
+            <li><a href="#" aria-current="page">1</a></li>
+            <li><a href="#">2</a></li>
+            <li><a href="#">3</a></li>
+            <li><a href="#" aria-label="Página siguiente"><svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="square" aria-hidden="true"><path d="m9 6 6 6-6 6"/></svg></a></li>
+          </ul>
+        </nav>
+      </section>
+    </div>
+  </main>
+
+  <div data-pie></div>
+  <script src="app.js"></script>
+</body>
+</html>

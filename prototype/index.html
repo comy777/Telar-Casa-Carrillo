@@ -1,0 +1,126 @@
+<!doctype html>
+<html lang="es-CO">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Telar Casa Carrillo · Ruanas y hamacas tejidas en telar</title>
+  <meta name="description" content="Ruanas, prendas y hamacas tejidas en telar por la familia Carrillo. Envíos a toda Colombia.">
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body data-pagina="index.html">
+  <div data-encabezado></div>
+
+  <main>
+    <section class="puesto" aria-labelledby="pieza-actual">
+      <div class="envoltura">
+        <div>
+          <h2 class="sr">Piezas del puesto</h2>
+          <ul class="pila"></ul>
+        </div>
+        <aside class="tabla" aria-live="polite">
+          <h1 id="pieza-actual">Ruana de lana virgen gris oveja</h1>
+          <p class="tejedor">Tejida en telar por <a href="#familia"><span class="marcador">[nombre del tejedor]</span></a></p>
+          <p class="precio-pintado">$ 289.000</p>
+          <p class="nota-iva">IVA incluido · Envío a toda Colombia</p>
+          <p class="existencias pocas">Quedan 3</p>
+          <button class="boton boton-accion" type="button">Agregar al carrito</button>
+          <a class="ver-mas" href="producto.html">Ver la pieza completa</a>
+        </aside>
+      </div>
+      <div class="zocalo" aria-hidden="true"></div>
+    </section>
+
+    <section class="seccion" aria-labelledby="t-categorias">
+      <div class="envoltura">
+        <h2 class="titulo" id="t-categorias">Lo que sale del telar</h2>
+        <div class="letreros">
+          <a class="letrero-cat" href="catalogo.html" style="--lana:var(--oveja)">
+            <span class="foto-marca"><span>[Foto real: ruanas dobladas]</span></span>
+            <span class="placa"><strong>Ruanas</strong><span>Lana virgen, colores de la oveja</span></span>
+          </a>
+          <a class="letrero-cat" href="catalogo.html" style="--lana:var(--pardo)">
+            <span class="foto-marca"><span>[Foto real: chales y ponchos]</span></span>
+            <span class="placa"><strong>Prendas</strong><span>Chales, ponchos y bufandas</span></span>
+          </a>
+          <a class="letrero-cat" href="catalogo.html#hamacas" style="--lana:var(--nogal)">
+            <span class="foto-marca"><span>[Foto real: hamaca colgada]</span></span>
+            <span class="placa"><strong>Hamacas</strong><span>Sencillas y dobles</span></span>
+          </a>
+        </div>
+      </div>
+    </section>
+
+    <section class="seccion" aria-labelledby="t-nuevas">
+      <div class="envoltura">
+        <div class="cabecera">
+          <h2 class="titulo" id="t-nuevas">Recién bajadas del telar</h2>
+          <a href="catalogo.html">Ver todas las piezas</a>
+        </div>
+        <ul class="piezas" data-piezas="todas" data-max="4"></ul>
+      </div>
+    </section>
+
+    <section class="seccion familia" id="familia" aria-labelledby="t-familia">
+      <div class="envoltura">
+        <h2 class="titulo" id="t-familia">Quién teje cada pieza</h2>
+        <ul class="tejedores">
+          <li class="tejedor-ficha"><a href="#"><div class="retrato">[Retrato real del tejedor]</div><h3>[Nombre]</h3><p>[Lo que teje y desde cuándo, según la historia de la familia]</p></a></li>
+          <li class="tejedor-ficha"><a href="#"><div class="retrato">[Retrato real del tejedor]</div><h3>[Nombre]</h3><p>[Lo que teje y desde cuándo, según la historia de la familia]</p></a></li>
+          <li class="tejedor-ficha"><a href="#"><div class="retrato">[Retrato real del tejedor]</div><h3>[Nombre]</h3><p>[Lo que teje y desde cuándo, según la historia de la familia]</p></a></li>
+        </ul>
+      </div>
+    </section>
+
+    <section class="seccion historia" id="historia" aria-labelledby="t-historia">
+      <div class="envoltura">
+        <div class="taller">[Foto real: el taller y los telares]</div>
+        <div class="texto">
+          <h2 class="titulo" id="t-historia">El taller de la familia Carrillo</h2>
+          <p><span class="marcador">[Aquí va la historia escrita de la familia: cómo empezó el taller, quién enseñó a tejer, dónde están los telares.]</span></p>
+          <p>Cada ruana, prenda y hamaca de esta tienda sale de ese taller. No revendemos piezas de otros: lo que ves aquí lo tejió alguien de la familia, y su nombre está en la ficha.</p>
+          <p><a class="boton boton-borde" href="#familia">Conoce a la familia</a></p>
+        </div>
+      </div>
+    </section>
+
+    <section class="seccion lista-precios" aria-labelledby="t-precios">
+      <div class="envoltura">
+        <div class="tablero">
+          <h2 class="titulo" id="t-precios">Precios del puesto</h2>
+          <ul class="precios" data-precios></ul>
+          <a class="boton boton-claro" href="catalogo.html">Ver todas las piezas</a>
+        </div>
+      </div>
+    </section>
+
+    <section class="seccion" aria-labelledby="t-testimonios">
+      <div class="envoltura">
+        <h2 class="titulo" id="t-testimonios">Lo que dicen quienes ya compraron</h2>
+        <div class="testimonios-vacio">
+          <p>Aquí irán testimonios reales de clientes, publicados desde el panel administrativo. El prototipo no inventa opiniones.</p>
+        </div>
+      </div>
+    </section>
+
+    <section class="seccion boletin" aria-labelledby="t-boletin">
+      <div class="envoltura">
+        <div>
+          <h2 class="titulo" id="t-boletin">Avísame cuando salga algo nuevo del telar</h2>
+          <p>Un correo cuando haya piezas nuevas. Nada más, y puedes salirte cuando quieras.</p>
+        </div>
+        <form onsubmit="event.preventDefault()">
+          <label class="sr" for="correo">Correo electrónico</label>
+          <div class="fila">
+            <input id="correo" type="email" placeholder="tu@correo.com" autocomplete="email" required>
+            <button class="boton boton-accion" type="submit">Suscribirme</button>
+          </div>
+          <label class="consentimiento"><input type="checkbox" required> Acepto el tratamiento de mis datos según la política de Telar Casa Carrillo (Ley 1581 de 2012).</label>
+        </form>
+      </div>
+    </section>
+  </main>
+
+  <div data-pie></div>
+  <script src="app.js"></script>
+</body>
+</html>
