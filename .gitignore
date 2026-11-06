@@ -15,3 +15,6 @@ test-results/
 .impeccable/config.local.json
 .DS_Store
 .claude/settings.local.json
+
+.claude
+.impeccable/
