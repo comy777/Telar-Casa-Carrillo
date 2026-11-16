@@ -5,11 +5,13 @@ import { Aviso, EstadoVacio, Esqueleto, claseBoton, formatoPesos } from "@telar/
 import { LineaCarrito } from "@/features/cart/panel-carrito";
 import { useCarrito } from "@/features/cart/cart-context";
 import { CHECKOUT_DISABLED } from "@/lib/env";
+import { useRutaActiva } from "@/features/navigation/navegacion-context";
 
 export default function Carrito() {
   const { carrito, cargando } = useCarrito();
   const lineas = carrito?.lines ?? [];
   const conProblemas = lineas.some((l) => l.issues.length > 0);
+  const conPago = useRutaActiva("checkout");
 
   return (
     <main className="envoltura carrito-pagina">
@@ -50,6 +52,8 @@ export default function Carrito() {
             <p className="nota-iva">IVA incluido. El envío y los cupones se calculan en el siguiente paso.</p>
             {CHECKOUT_DISABLED ? (
               <Aviso tono="info">La tienda está en mantenimiento. Podrás pagar en un rato; tu carrito se guarda.</Aviso>
+            ) : !conPago ? (
+              <Aviso tono="info">Por ahora no recibimos pagos en línea. Escríbenos y te ayudamos con tu pedido.</Aviso>
             ) : (
               <Link
                 href="/checkout"

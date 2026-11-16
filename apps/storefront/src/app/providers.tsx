@@ -5,8 +5,10 @@ import { useState, type ReactNode } from "react";
 import { isApiError } from "@telar/api-client";
 import { SesionProvider } from "@/features/auth/session-context";
 import { CarritoProvider } from "@/features/cart/cart-context";
+import { NavegacionProvider } from "@/features/navigation/navegacion-context";
+import type { Ruta } from "@/lib/navegacion";
 
-export function Providers({ children }: { children: ReactNode }) {
+export function Providers({ rutas, children }: { rutas: Ruta[]; children: ReactNode }) {
   const [qc] = useState(
     () =>
       new QueryClient({
@@ -21,9 +23,11 @@ export function Providers({ children }: { children: ReactNode }) {
   );
   return (
     <QueryClientProvider client={qc}>
-      <SesionProvider>
-        <CarritoProvider>{children}</CarritoProvider>
-      </SesionProvider>
+      <NavegacionProvider rutas={rutas}>
+        <SesionProvider>
+          <CarritoProvider>{children}</CarritoProvider>
+        </SesionProvider>
+      </NavegacionProvider>
     </QueryClientProvider>
   );
 }

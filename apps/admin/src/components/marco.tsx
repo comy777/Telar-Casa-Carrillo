@@ -41,6 +41,7 @@ const GRUPOS: Array<{ titulo: string; enlaces: Enlace[] }> = [
       { href: "/contenido/testimonios", texto: "Testimonios", permiso: "content:manage" },
       { href: "/contenido/preguntas", texto: "Preguntas frecuentes", permiso: "content:manage" },
       { href: "/contenido/paginas", texto: "Páginas", permiso: "content:manage" },
+      { href: "/contenido/navegacion", texto: "Navegación de la tienda", permiso: "content:manage" },
       { href: "/contenido/ajustes", texto: "Ajustes de la tienda", permiso: "content:manage" },
       { href: "/mensajes", texto: "Mensajes y boletín", permiso: "messages:read" },
     ],

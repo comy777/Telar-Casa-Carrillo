@@ -7,7 +7,7 @@
     ".": "./src/index.ts"
   },
   "scripts": {
-    "generate": "openapi-typescript ${API_DOCS_URL:-http://localhost:3001/api/docs-json} -o src/schema.d.ts",
+    "generate": "node scripts/generate.mjs",
     "check": "node scripts/check-schema.mjs",
     "typecheck": "tsc --noEmit"
   },

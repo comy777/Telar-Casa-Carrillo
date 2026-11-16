@@ -1395,6 +1395,23 @@ export interface paths {
         patch?: never;
         trace?: never;
     };
+    "/api/v1/content/navigation": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        /** Rutas del storefront: cuáles están activas y dónde van en el menú y el pie */
+        get: operations["PublicContentController_navigation_v1"];
+        put?: never;
+        post?: never;
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
     "/api/v1/content/banners": {
         parameters: {
             query?: never;
@@ -1436,6 +1453,23 @@ export interface paths {
             cookie?: never;
         };
         get: operations["PublicContentController_faqs_v1"];
+        put?: never;
+        post?: never;
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
+    "/api/v1/content/pages": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        /** Páginas publicadas (título y enlace), para el pie y el mapa del sitio */
+        get: operations["PublicContentController_pages_v1"];
         put?: never;
         post?: never;
         delete?: never;
@@ -1669,6 +1703,39 @@ export interface paths {
         options?: never;
         head?: never;
         patch: operations["AdminContentController_updatePage_v1"];
+        trace?: never;
+    };
+    "/api/v1/admin/content/navigation": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        get: operations["AdminContentController_routes_v1"];
+        put?: never;
+        post?: never;
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
+    "/api/v1/admin/content/navigation/{key}": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        get?: never;
+        put?: never;
+        post?: never;
+        delete?: never;
+        options?: never;
+        head?: never;
+        /** Activa, desactiva, renombra o reubica una ruta del storefront */
+        patch: operations["AdminContentController_updateRoute_v1"];
         trace?: never;
     };
     "/api/v1/admin/content/settings": {
@@ -3066,6 +3133,7 @@ export interface components {
             url: string;
         };
         PublicSettingsResponse: {
+            storeName: string | null;
             tagline: string | null;
             location: string | null;
             contactEmail: string | null;
@@ -3075,6 +3143,22 @@ export interface components {
             storyTitle: string | null;
             storyBody: string | null;
             announcement: string | null;
+        };
+        /** @enum {string} */
+        FooterGroup: "SHOP" | "HELP" | "INFO";
+        StoreRouteResponse: {
+            /** @example contacto */
+            key: string;
+            /**
+             * @description Prefijo: también cubre sus subrutas
+             * @example /contacto
+             */
+            path: string;
+            label: string;
+            isEnabled: boolean;
+            showInHeader: boolean;
+            footerGroup: components["schemas"]["FooterGroup"] | null;
+            sortOrder: number;
         };
         BannerResponse: {
             id: string;
@@ -3096,6 +3180,12 @@ export interface components {
             id: string;
             question: string;
             answer: string;
+        };
+        PageLinkResponse: {
+            slug: string;
+            title: string;
+            /** Format: date-time */
+            updatedAt: string;
         };
         PageResponse: {
             slug: string;
@@ -3273,6 +3363,33 @@ export interface components {
             /** @default false */
             isPublished: boolean;
         };
+        AdminStoreRouteResponse: {
+            /** @example contacto */
+            key: string;
+            /**
+             * @description Prefijo: también cubre sus subrutas
+             * @example /contacto
+             */
+            path: string;
+            label: string;
+            isEnabled: boolean;
+            showInHeader: boolean;
+            footerGroup: components["schemas"]["FooterGroup"] | null;
+            sortOrder: number;
+            description: string | null;
+            /** @description No se puede desactivar */
+            isLocked: boolean;
+            /** Format: date-time */
+            updatedAt: string;
+        };
+        UpdateStoreRouteDto: {
+            label?: string;
+            isEnabled?: boolean;
+            showInHeader?: boolean;
+            /** @description null la quita del pie */
+            footerGroup?: components["schemas"]["FooterGroup"] | null;
+            sortOrder?: number;
+        };
         SocialLinkDto: {
             /** @example Instagram */
             name: string;
@@ -3280,6 +3397,8 @@ export interface components {
             url: string;
         };
         StoreSettingsDto: {
+            /** @example Telar Casa Carrillo */
+            storeName?: string | null;
             tagline?: string | null;
             location?: string | null;
             contactEmail?: string | null;
@@ -5629,6 +5748,25 @@ export interface operations {
             };
         };
     };
+    PublicContentController_navigation_v1: {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        requestBody?: never;
+        responses: {
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["StoreRouteResponse"][];
+                };
+            };
+        };
+    };
     PublicContentController_banners_v1: {
         parameters: {
             query?: never;
@@ -5682,6 +5820,25 @@ export interface operations {
                 };
                 content: {
                     "application/json": components["schemas"]["FaqResponse"][];
+                };
+            };
+        };
+    };
+    PublicContentController_pages_v1: {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        requestBody?: never;
+        responses: {
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["PageLinkResponse"][];
                 };
             };
         };
@@ -6185,6 +6342,50 @@ export interface operations {
                 };
                 content: {
                     "application/json": components["schemas"]["AdminPageResponse"];
+                };
+            };
+        };
+    };
+    AdminContentController_routes_v1: {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        requestBody?: never;
+        responses: {
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["AdminStoreRouteResponse"][];
+                };
+            };
+        };
+    };
+    AdminContentController_updateRoute_v1: {
+        parameters: {
+            query?: never;
+            header?: never;
+            path: {
+                key: string;
+            };
+            cookie?: never;
+        };
+        requestBody: {
+            content: {
+                "application/json": components["schemas"]["UpdateStoreRouteDto"];
+            };
+        };
+        responses: {
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["AdminStoreRouteResponse"];
                 };
             };
         };

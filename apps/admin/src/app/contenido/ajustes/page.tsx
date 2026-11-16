@@ -59,7 +59,15 @@ function Formulario({ inicial }: { inicial: Ajustes }) {
           <h2>Contacto y pie de página</h2>
           {error ? <Aviso tono="error">{error}</Aviso> : null}
           {ok ? <Aviso tono="exito">Guardado. La tienda lo muestra en unos minutos.</Aviso> : null}
-          <Campo etiqueta="Descripción corta" value={t("tagline")} onChange={(e) => set("tagline", e.target.value)} maxLength={200} ayuda="Se ve en el pie de página." />
+          <Campo
+            etiqueta="Nombre de la tienda"
+            value={t("storeName")}
+            onChange={(e) => set("storeName", e.target.value)}
+            maxLength={80}
+            placeholder="Telar Casa Carrillo"
+            ayuda="Se ve en el encabezado, el pie y el título de cada página."
+          />
+          <Campo etiqueta="Descripción corta" value={t("tagline")} onChange={(e) => set("tagline", e.target.value)} maxLength={200} ayuda="Se ve en el pie y en la descripción para buscadores." />
           <Campo etiqueta="Ubicación" value={t("location")} onChange={(e) => set("location", e.target.value)} placeholder="Nobsa, Boyacá" />
           <div className="fila-2">
             <Campo etiqueta="Correo de contacto" type="email" value={t("contactEmail")} onChange={(e) => set("contactEmail", e.target.value)} />

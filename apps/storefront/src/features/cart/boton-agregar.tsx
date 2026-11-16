@@ -4,7 +4,7 @@ import { useState } from "react";
 import { Boton } from "@telar/ui";
 import { errorMessage } from "@telar/api-client";
 import { api } from "@/lib/api-browser";
-import { CHECKOUT_DISABLED } from "@/lib/env";
+import { useVentaCerrada } from "@/features/navigation/navegacion-context";
 import { useCarrito } from "./cart-context";
 
 /** Agrega la única variante de una pieza (las piezas con varias variantes se eligen en su ficha). */
@@ -12,6 +12,7 @@ export function BotonAgregarRapido({ slug, agotada }: { slug: string; agotada: b
   const { agregar } = useCarrito();
   const [cargando, setCargando] = useState(false);
   const [error, setError] = useState<string | null>(null);
+  const ventaCerrada = useVentaCerrada();
 
   if (agotada) {
     return (
@@ -20,10 +21,10 @@ export function BotonAgregarRapido({ slug, agotada }: { slug: string; agotada: b
       </Boton>
     );
   }
-  if (CHECKOUT_DISABLED) {
+  if (ventaCerrada) {
     return (
       <Boton variante="accion" disabled>
-        Tienda en mantenimiento
+        {ventaCerrada}
       </Boton>
     );
   }

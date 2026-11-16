@@ -2,7 +2,8 @@ import type { Metadata } from "next";
 import Link from "next/link";
 import { notFound } from "next/navigation";
 import { EstadoVacio, claseBoton } from "@telar/ui";
-import { getPage } from "@/lib/content";
+import { getNavigation, getPage } from "@/lib/content";
+import { rutaActiva } from "@/lib/navegacion";
 import { Markdown } from "@/components/markdown";
 
 export const revalidate = 300;
@@ -33,6 +34,8 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
 export default async function PaginaContenido({ params }: Props) {
   const { pagina } = await params;
   if (!SLUG.test(pagina)) notFound();
+  // Las páginas del panel van por ruta comodín: el proxy no las cubre, se revisa aquí.
+  if (!rutaActiva(await getNavigation(), "paginas")) notFound();
   const p = await getPage(pagina);
   const enlazada = ENLAZADAS[pagina];
   if (!p && !enlazada) notFound();

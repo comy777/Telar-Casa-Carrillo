@@ -6,19 +6,21 @@ import { useState } from "react";
 import { Icono } from "@telar/ui";
 import { useCarrito } from "@/features/cart/cart-context";
 import { useSesion } from "@/features/auth/session-context";
-import { STORE_NAME } from "@/lib/env";
+import { useRutaActiva } from "@/features/navigation/navegacion-context";
 
 export interface EnlaceNav {
   href: string;
   texto: string;
 }
 
-export function Encabezado({ enlaces }: { enlaces: EnlaceNav[] }) {
+export function Encabezado({ nombre, enlaces }: { nombre: string; enlaces: EnlaceNav[] }) {
   const ruta = usePathname();
   const [abierto, setAbierto] = useState(false);
   const { carrito, abrir } = useCarrito();
   const { estado, usuario } = useSesion();
   const piezas = carrito?.itemCount ?? 0;
+  const conCuenta = useRutaActiva("cuenta");
+  const conCarrito = useRutaActiva("carrito");
 
   // Al cambiar de página se cierra el menú (ajuste de estado durante el render, sin efecto).
   const [rutaMenu, setRutaMenu] = useState(ruta);
@@ -31,7 +33,7 @@ export function Encabezado({ enlaces }: { enlaces: EnlaceNav[] }) {
     <header className="letrero-nav">
       <div className="envoltura">
         <Link className="marca" href="/">
-          {STORE_NAME}
+          {nombre}
         </Link>
         <nav id="menu" aria-label="Principal" className={abierto ? "abierto" : undefined}>
           {enlaces.map((e) => (
@@ -39,14 +41,18 @@ export function Encabezado({ enlaces }: { enlaces: EnlaceNav[] }) {
               {e.texto}
             </Link>
           ))}
-          <Link href={estado === "conectado" ? "/cuenta" : "/cuenta/ingresar"} className="enlace-cuenta">
-            {estado === "conectado" ? `Hola, ${usuario?.firstName ?? ""}` : "Ingresar"}
-          </Link>
+          {conCuenta ? (
+            <Link href={estado === "conectado" ? "/cuenta" : "/cuenta/ingresar"} className="enlace-cuenta">
+              {estado === "conectado" ? `Hola, ${usuario?.firstName ?? ""}` : "Ingresar"}
+            </Link>
+          ) : null}
         </nav>
-        <button type="button" className="carrito" onClick={abrir} aria-label={`Carrito, ${piezas} ${piezas === 1 ? "pieza" : "piezas"}`}>
-          <Icono nombre="bolsa" width={18} height={18} />
-          <span className="texto">Carrito</span> {piezas}
-        </button>
+        {conCarrito ? (
+          <button type="button" className="carrito" onClick={abrir} aria-label={`Carrito, ${piezas} ${piezas === 1 ? "pieza" : "piezas"}`}>
+            <Icono nombre="bolsa" width={18} height={18} />
+            <span className="texto">Carrito</span> {piezas}
+          </button>
+        ) : null}
         <button
           type="button"
           className="menu-boton"

@@ -7,7 +7,7 @@ import { Boton, Cantidad, Existencias, Precio, cx } from "@telar/ui";
 import { errorMessage } from "@telar/api-client";
 import type { ProductDetail } from "@/lib/catalog";
 import { useCarrito } from "@/features/cart/cart-context";
-import { CHECKOUT_DISABLED } from "@/lib/env";
+import { useVentaCerrada } from "@/features/navigation/navegacion-context";
 
 type Variante = ProductDetail["variants"][number];
 
@@ -24,6 +24,7 @@ export function FichaProducto({ producto }: { producto: ProductDetail }) {
   const [enviando, setEnviando] = useState(false);
   const [error, setError] = useState<string | null>(null);
   const { agregar } = useCarrito();
+  const ventaCerrada = useVentaCerrada();
 
   // Fotos: las de la variante elegida primero, luego las generales.
   const fotos = useMemo(() => {
@@ -127,9 +128,9 @@ export function FichaProducto({ producto }: { producto: ProductDetail }) {
         {variante ? <Existencias disponibilidad={variante.availability} /> : null}
 
         <div className="compra">
-          <Cantidad valor={cantidad} max={MAX_POR_LINEA} onCambio={setCantidad} disabled={agotada || CHECKOUT_DISABLED} />
-          <Boton type="submit" variante="accion" cargando={enviando} disabled={agotada || CHECKOUT_DISABLED}>
-            {CHECKOUT_DISABLED ? "Tienda en mantenimiento" : agotada ? "Agotada" : "Agregar al carrito"}
+          <Cantidad valor={cantidad} max={MAX_POR_LINEA} onCambio={setCantidad} disabled={agotada || !!ventaCerrada} />
+          <Boton type="submit" variante="accion" cargando={enviando} disabled={agotada || !!ventaCerrada}>
+            {ventaCerrada ?? (agotada ? "Agotada" : "Agregar al carrito")}
           </Boton>
         </div>
         {error ? (

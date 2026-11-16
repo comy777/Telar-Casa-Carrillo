@@ -3,7 +3,8 @@ import Image from "next/image";
 import Link from "next/link";
 import { notFound } from "next/navigation";
 import { getProduct, getRelated } from "@/lib/catalog";
-import { SITE_URL, STORE_NAME } from "@/lib/env";
+import { getStoreSettings } from "@/lib/content";
+import { SITE_URL } from "@/lib/env";
 import { FichaProducto } from "@/features/catalog/ficha-producto";
 import { ListaPiezas } from "@/features/catalog/tarjeta-pieza";
 import { Markdown } from "@/components/markdown";
@@ -31,7 +32,7 @@ const DISPONIBILIDAD = {
 
 export default async function Producto({ params }: Props) {
   const { slug } = await params;
-  const [p, relacionadas] = await Promise.all([getProduct(slug), getRelated(slug)]);
+  const [p, relacionadas, { storeName }] = await Promise.all([getProduct(slug), getRelated(slug), getStoreSettings()]);
   if (!p) notFound();
 
   const categoria = p.categories[0];
@@ -44,7 +45,7 @@ export default async function Producto({ params }: Props) {
         sku: p.sku,
         description: p.shortDescription ?? p.description.slice(0, 300),
         image: p.images.map((i) => i.url),
-        brand: { "@type": "Brand", name: STORE_NAME },
+        brand: { "@type": "Brand", name: storeName },
         material: p.materials.join(", ") || undefined,
         offers: p.variants.map((v) => ({
           "@type": "Offer",
