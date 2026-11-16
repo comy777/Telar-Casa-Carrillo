@@ -4,6 +4,7 @@ import "./globals.css";
 import { Providers } from "./providers";
 import { Encabezado } from "@/components/encabezado";
 import { Pie } from "@/components/pie";
+import { Movimiento } from "@/components/movimiento";
 import { PanelCarrito } from "@/features/cart/panel-carrito";
 import { getCategories } from "@/lib/catalog";
 import { getNavigation, getPages, getStoreSettings } from "@/lib/content";
@@ -55,6 +56,7 @@ export default async function RootLayout({ children }: { children: React.ReactNo
           <div id="contenido">{children}</div>
           <Pie nombre={ajustes.storeName} columnas={rutasPie(rutas)} categorias={categorias} paginas={paginas} datos={ajustes.footer} />
           <PanelCarrito />
+          <Movimiento />
         </Providers>
       </body>
     </html>

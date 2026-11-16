@@ -328,6 +328,27 @@ A green tablero listing every piece: a 28×18 wool swatch, name (Hanken 600), a 
 ### Photo placeholders
 Until real photography arrives, every image slot is its wool fill with a centered bracketed label (`[Foto real: …]`) on a `rgb(26 26 23 / 0.55)` patch in `cal`. Text placeholders use the `marcador` chip (`cal-sombra`, 600, `tinta-suave`). These are scaffolding for missing evidence, not decoration; nothing invented fills them.
 
+## Motion
+
+**Thesis: paint and cloth, never light.** Things arrive the way they would at the stall: a sign is lettered with a brush, a garment is unfolded, a price list is chalked line by line. Every edge of an entrance is hard (`clip-path`), like a brush stroke or a fold; nothing fades through blur, glows or casts a shadow.
+
+- **El despliegue de la pila** (signature, first screen): band height, 240ms, `cubic-bezier(0.16, 1, 0.3, 1)`.
+- **Apariciones al hacer scroll** (`apps/storefront/src/components/movimiento.tsx` + `app/movimiento.css`), once per element, when its top crosses 92% of the viewport:
+  - **Letra** (section titles, ficha headings): painted left to right, 720ms.
+  - **Tela** (product cards, weaver portraits): the photo unfolds top to bottom (680ms), then the price tag is painted on (420ms, +260ms) and the name and meta settle 8px (+340ms).
+  - **Letrero** (category signs): the sign unfolds downward and its plaque is painted at its foot (+320ms).
+  - **Fila** (price list): the dotted leader is drawn left to right and the price appears after it.
+  - **Cita** (testimonials): painted from its green rule, left to right.
+  - **Banner / Historia**: the photo or wool stripes are uncovered left to right; the board swings from −3deg to its hanging place.
+- Siblings that enter together stagger by 70ms, capped at 420ms. Ease is always `cubic-bezier(0.16, 1, 0.3, 1)`.
+
+### Named Rules
+**The Visible by Default Rule.** Content is never hidden by CSS alone. The script marks as waiting only what is still below the fold, so a failed script, a slow phone or a print shows the full page, and what is already on screen never blinks.
+
+**The One Pass Rule.** Each element enters once; scrolling back up does not replay it. Admin (Operate) gets no entrances, only feedback.
+
+**Reduced motion.** With `prefers-reduced-motion: reduce` nothing waits and nothing moves; the band unfold is instant.
+
 ## Do's and Don'ts
 
 ### Do:
@@ -337,7 +358,7 @@ Until real photography arrives, every image slot is its wool fill with a centere
 - **Do** close the first screen and the page with the zócalo (green band, 6px `verde-hondo` top edge).
 - **Do** use `cal` and `verde-claro` for text on green, and keep focus visible (3px `almagre`, or `aviso` where almagre sits on green).
 - **Do** keep tap targets at 44px or more and long text at 60–62ch.
-- **Do** honor `prefers-reduced-motion`: the band unfold becomes instant.
+- **Do** honor `prefers-reduced-motion`: the band unfold becomes instant and scroll entrances are off.
 
 ### Don't:
 - **Don't** round corners; every radius is 0.
@@ -345,5 +366,5 @@ Until real photography arrives, every image slot is its wool fill with a centere
 - **Don't** use a cream or beige ground; the wall is cold `cal`.
 - **Don't** put a headline over a full-bleed photo or line up identical cards as the first screen.
 - **Don't** add uppercase kickers or eyebrows above titles.
-- **Don't** scatter animation; the only motion is the 240ms band unfold.
+- **Don't** add motion outside the Motion section: no fade-and-rise, hover lifts, parallax, blur or bounce; entrances use hard-edged paint and fold reveals only.
 - **Don't** fill an image or text slot with invented people, testimonials or history; use the marked placeholder.

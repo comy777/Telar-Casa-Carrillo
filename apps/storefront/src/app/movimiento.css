@@ -1,0 +1,112 @@
+/*
+ * Movimiento al hacer scroll (ver components/movimiento.tsx y DESIGN.md › Motion).
+ *
+ * Material: pintura y tela, no luz. Los bordes de cada aparición son duros (clip-path),
+ * como un trazo de brocha o una prenda que se despliega; no hay difuminados ni sombras.
+ * El estado por defecto es visible: solo [data-espera] oculta, y lo pone el script.
+ */
+@layer components {
+  :root {
+    --mov-salida: cubic-bezier(0.16, 1, 0.3, 1);
+    --mov-pintar: 720ms;
+    --mov-desplegar: 680ms;
+  }
+
+  /* ---- Letra: el título se pinta de izquierda a derecha, como un letrero ---- */
+  [data-mov="letra"] {
+    clip-path: inset(0 0 0 0);
+    transition: clip-path var(--mov-pintar) var(--mov-salida) var(--retraso, 0ms);
+  }
+  [data-mov="letra"][data-espera] { clip-path: inset(0 100% 0 0); }
+
+  /* ---- Tela: la foto se despliega de arriba abajo y la etiqueta se pinta encima ---- */
+  [data-mov="tela"] .foto-pieza,
+  [data-mov="retrato"] .retrato {
+    clip-path: inset(0 0 0 0);
+    transition: clip-path var(--mov-desplegar) var(--mov-salida) var(--retraso, 0ms);
+  }
+  [data-mov="tela"][data-espera] .foto-pieza,
+  [data-mov="retrato"][data-espera] .retrato { clip-path: inset(0 0 100% 0); }
+
+  [data-mov="tela"] .etiqueta {
+    clip-path: inset(0 0 0 0);
+    transition: clip-path 420ms var(--mov-salida) calc(var(--retraso, 0ms) + 260ms);
+  }
+  [data-mov="tela"][data-espera] .etiqueta { clip-path: inset(0 100% 0 0); }
+
+  [data-mov="tela"] :is(h3, p),
+  [data-mov="retrato"] :is(h3, p) {
+    transition:
+      opacity 360ms var(--mov-salida) calc(var(--retraso, 0ms) + 340ms),
+      translate 360ms var(--mov-salida) calc(var(--retraso, 0ms) + 340ms);
+  }
+  [data-mov="tela"][data-espera] :is(h3, p),
+  [data-mov="retrato"][data-espera] :is(h3, p) { opacity: 0; translate: 0 8px; }
+
+  /* ---- Letrero de categoría: el letrero baja desplegado y la placa se pinta al pie ---- */
+  [data-mov="letrero"] {
+    /* Es un enlace: el recorte visible deja margen para el anillo de foco (3px + 3px). */
+    clip-path: inset(-8px);
+    transition: clip-path var(--mov-desplegar) var(--mov-salida) var(--retraso, 0ms);
+  }
+  [data-mov="letrero"][data-espera] { clip-path: inset(-8px -8px 100% -8px); }
+  [data-mov="letrero"] .placa {
+    clip-path: inset(0 0 0 0);
+    transition: clip-path 460ms var(--mov-salida) calc(var(--retraso, 0ms) + 320ms);
+  }
+  [data-mov="letrero"][data-espera] .placa { clip-path: inset(0 100% 0 0); }
+
+  /* ---- Fila de la lista de precios: el punteado se traza y aparece el valor ---- */
+  [data-mov="fila"] .relleno {
+    transform-origin: left center;
+    transition: scale 520ms var(--mov-salida) calc(var(--retraso, 0ms) + 120ms);
+  }
+  [data-mov="fila"][data-espera] .relleno { scale: 0 1; }
+  [data-mov="fila"] :is(a, .valor) {
+    transition: opacity 320ms var(--mov-salida) var(--retraso, 0ms);
+  }
+  [data-mov="fila"] .valor { transition-delay: calc(var(--retraso, 0ms) + 420ms); }
+  [data-mov="fila"][data-espera] :is(a, .valor) { opacity: 0; }
+
+  /* ---- Cita: el testimonio se pinta desde su filete verde ---- */
+  [data-mov="cita"] {
+    clip-path: inset(0 0 0 0);
+    transition: clip-path var(--mov-pintar) var(--mov-salida) var(--retraso, 0ms);
+  }
+  [data-mov="cita"][data-espera] { clip-path: inset(0 100% 0 0); }
+
+  /* ---- Banner: la foto se descubre y la tabla queda colgada en su sitio ---- */
+  [data-mov="banner"] .letrero-banner-foto {
+    clip-path: inset(0 0 0 0);
+    transition: clip-path 760ms var(--mov-salida);
+  }
+  [data-mov="banner"][data-espera] .letrero-banner-foto { clip-path: inset(0 100% 0 0); }
+  [data-mov="banner"] .tabla {
+    transform-origin: top right;
+    transition:
+      rotate 640ms var(--mov-salida) 220ms,
+      translate 640ms var(--mov-salida) 220ms,
+      opacity 240ms linear 220ms;
+  }
+  [data-mov="banner"][data-espera] .tabla { rotate: -3deg; translate: 0 28px; opacity: 0; }
+
+  /* ---- Historia: las franjas de lana del taller se tienden una a una ---- */
+  [data-mov="historia"] .taller {
+    clip-path: inset(0 0 0 0);
+    transition: clip-path 820ms var(--mov-salida);
+  }
+  [data-mov="historia"][data-espera] .taller { clip-path: inset(0 100% 0 0); }
+  [data-mov="historia"] .texto {
+    transition:
+      opacity 420ms var(--mov-salida) 260ms,
+      translate 520ms var(--mov-salida) 260ms;
+  }
+  [data-mov="historia"][data-espera] .texto { opacity: 0; translate: 0 16px; }
+
+  @media (prefers-reduced-motion: reduce) {
+    [data-espera], [data-espera] * { clip-path: none !important; opacity: 1 !important; translate: none !important; rotate: none !important; scale: none !important; }
+  }
+  @media print {
+    [data-espera], [data-espera] * { clip-path: none !important; opacity: 1 !important; translate: none !important; rotate: none !important; scale: none !important; }
+  }
+}
