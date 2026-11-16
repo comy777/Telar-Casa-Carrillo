@@ -28,3 +28,67 @@ jobs:
       # El build de producción prerenderiza el catálogo y necesita la API; se hace en el
       # despliegue (o en un job con el backend levantado). Las pruebas E2E también:
       #   TIENDA_URL=https://staging... PW_CHANNEL=chrome npx playwright test
+
+  # El cliente tipado (packages/api-client/src/schema.d.ts) debe coincidir con el OpenAPI
+  # que publica el backend en su rama main. Si el repo del backend es privado, crea el
+  # secreto BACKEND_REPO_TOKEN (token con lectura de ese repo). Si falla: levanta el backend
+  # y ejecuta `npm run api:generate`, o fusiona primero el cambio del backend.
+  contrato-api:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    services:
+      postgres:
+        image: postgres:16-alpine
+        env:
+          POSTGRES_USER: ci
+          POSTGRES_PASSWORD: ci
+          POSTGRES_DB: telar_contrato
+        ports:
+          - 5432:5432
+        options: >-
+          --health-cmd "pg_isready -U ci -d telar_contrato"
+          --health-interval 5s
+          --health-timeout 5s
+          --health-retries 10
+    env:
+      DATABASE_URL: postgresql://ci:ci@localhost:5432/telar_contrato?schema=public
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/checkout@v4
+        with:
+          repository: comy777/Telar-Casa-Carrillo-Backend
+          ref: main
+          path: backend
+          token: ${{ secrets.BACKEND_REPO_TOKEN || github.token }}
+      - uses: actions/setup-node@v4
+        with:
+          node-version-file: .nvmrc
+          cache: npm
+          cache-dependency-path: |
+            package-lock.json
+            backend/package-lock.json
+      - name: Levantar el backend
+        working-directory: backend
+        env:
+          NODE_ENV: development
+          API_PORT: "3001"
+          STOREFRONT_URL: http://localhost:3000
+          JWT_ACCESS_SECRET: ci-contract-check-secret-with-32-plus-characters
+          JOBS_ENABLED: "false"
+          LOG_LEVEL: warn
+        run: |
+          npm ci
+          npx prisma migrate deploy
+          npm run build
+          nohup node dist/main > api.log 2>&1 &
+          for i in $(seq 1 60); do
+            curl -sf http://localhost:3001/api/health && exit 0
+            sleep 1
+          done
+          cat api.log
+          exit 1
+      - run: npm ci
+      - name: El cliente coincide con el OpenAPI del backend
+        run: npm run api:check
+        env:
+          API_DOCS_URL: http://localhost:3001/api/docs-json

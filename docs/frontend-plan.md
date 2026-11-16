@@ -207,7 +207,7 @@ Componentes de admin compartidos: `DataTable` (paginación y filtros por URL), `
 - Los tipos de la API son la única fuente de verdad del contrato (generados de OpenAPI).
 - Imágenes: el admin las sube a la API (`multipart`), la API las guarda en Cloudinary y devuelve la URL; el storefront las sirve con `next/image` y un loader de Cloudinary (formato y tamaño automáticos).
 - Pagos: el navegador nunca confirma un pago; tras volver de Wompi la página llama a `/payments/confirm` y muestra el estado que responde el backend.
-- Revalidación de lo público: ISR por tiempo al inicio; más adelante, un webhook del backend a `/api/revalidate` (con secreto) cuando se publique un producto o contenido.
+- Revalidación de lo público: ISR por tiempo como respaldo, y la API llama a `POST /api/revalidate` (con `REVALIDATE_SECRET`) cuando el panel cambia catálogo, inventario o contenido; invalida las etiquetas `catalog`, `content` y `navigation`. El bloqueo de rutas del `proxy.ts` guarda su lista 30 s en memoria y no se invalida con este aviso.
 
 ## 6. Dependencias externas
 

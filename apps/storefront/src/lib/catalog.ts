@@ -92,7 +92,7 @@ export async function getTechniques(): Promise<string[]> {
 
 export async function getRelated(slug: string): Promise<ProductCard[]> {
   try {
-    const { data } = await api([`product:${slug}`]).GET("/api/v1/catalog/products/{slug}/related", {
+    const { data } = await api(["catalog", `product:${slug}`]).GET("/api/v1/catalog/products/{slug}/related", {
       params: { path: { slug } },
     });
     return data ?? [];

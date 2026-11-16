@@ -28,8 +28,9 @@ export default function Inventario() {
 }
 
 function Pantalla() {
-  const { valores: f, pagina, poner } = useFiltros(["q", "stock"] as const);
-  const [elegido, setElegido] = useState<Item | null>(null);
+  // La pieza abierta vive en la URL (?variante=…): así llegan los enlaces de las alertas de poco stock.
+  const { valores: f, pagina, poner } = useFiltros(["q", "stock", "variante"] as const);
+  const elegir = (variante: string) => poner({ variante, pagina: pagina > 1 ? String(pagina) : "" });
   const lista = useQuery({
     queryKey: ["inventario", f, pagina],
     queryFn: async () =>
@@ -41,6 +42,14 @@ function Pantalla() {
         })
       ).data,
   });
+  const enLista = f.variante ? lista.data?.items.find((i) => i.variantId === f.variante) : undefined;
+  // Si la pieza no está en la página visible (p. ej. desde un correo), se pide directamente.
+  const directo = useQuery({
+    queryKey: ["inventario-item", f.variante],
+    queryFn: async () => (await api.GET("/api/v1/admin/inventory/{variantId}", { params: { path: { variantId: f.variante } } })).data,
+    enabled: Boolean(f.variante) && !lista.isPending && !enLista,
+  });
+  const elegido: Item | null = f.variante ? (enLista ?? directo.data ?? null) : null;
 
   return (
     <>
@@ -70,7 +79,7 @@ function Pantalla() {
               {
                 titulo: "Pieza",
                 celda: (i) => (
-                  <button type="button" className="boton boton-texto" onClick={() => setElegido(i)} style={{ textAlign: "left", display: "block" }}>
+                  <button type="button" className="boton boton-texto" onClick={() => elegir(i.variantId)} style={{ textAlign: "left", display: "block" }}>
                     {i.productName}
                     <span className="celda-secundaria">
                       {i.variantName} · {i.sku}
@@ -93,7 +102,10 @@ function Pantalla() {
           />
           <Paginador pagina={pagina} total={lista.data?.total ?? 0} porPagina={30} onCambio={(p) => poner({ pagina: String(p) })} />
         </div>
-        {elegido ? <Movimientos key={elegido.variantId} item={elegido} onCerrar={() => setElegido(null)} /> : null}
+        {elegido ? <Movimientos key={elegido.variantId} item={elegido} onCerrar={() => elegir("")} /> : null}
+        {f.variante && directo.isError ? (
+          <Aviso tono="error">No se encontró la pieza del enlace. Puede haberse eliminado.</Aviso>
+        ) : null}
       </div>
     </>
   );
