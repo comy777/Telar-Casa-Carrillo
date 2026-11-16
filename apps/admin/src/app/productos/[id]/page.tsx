@@ -1,12 +1,13 @@
 "use client";
 
 import Image from "next/image";
+import { useSearchParams } from "next/navigation";
 import { use, useState } from "react";
 import { useQuery, useQueryClient } from "@tanstack/react-query";
 import { Aviso, Boton, Campo, Esqueleto, Icono, cx } from "@telar/ui";
-import { errorMessage } from "@telar/api-client";
+import { ApiError, errorMessage } from "@telar/api-client";
 import { api } from "@/lib/api-browser";
-import { enviarFormulario } from "@/lib/archivos";
+import { MAX_FOTOS_PRODUCTO, subirFotosProducto } from "@/lib/archivos";
 import { STOREFRONT_URL } from "@/lib/env";
 import { useSesion } from "@/lib/sesion";
 import { Cabecera, Insignia, SubirImagen } from "@/components/base";
@@ -160,7 +161,8 @@ function Variantes({ producto, editable, onGuardado }: Props) {
         recuerdan): se desactivan.
       </p>
       {avisos}
-      <div className="variantes">
+      <div className="zona-variantes">
+        <div className="variantes">
         {producto.variants.map((v) => (
           <FilaVariante key={`${v.id}:${producto.updatedAt}`} productoId={producto.id} variante={v} editable={editable} ejecutar={ejecutar} onGuardado={onGuardado} />
         ))}
@@ -197,6 +199,7 @@ function Variantes({ producto, editable, onGuardado }: Props) {
           </Boton>
         </form>
       ) : null}
+      </div>
     </section>
   );
 }
@@ -261,7 +264,9 @@ function FilaVariante({
 
 function Fotos({ producto, editable, onGuardado }: Props) {
   const { ejecutar, avisos } = useGuardar();
+  const fallaronAlCrear = useSearchParams().get("fotos") === "error";
   const fotos = [...producto.images].sort((a, b) => a.sortOrder - b.sortOrder);
+  const cupo = MAX_FOTOS_PRODUCTO - fotos.length;
   const editar = (imageId: string, body: { altText?: string | null; isPrimary?: boolean; sortOrder?: number; variantId?: string | null }) =>
     ejecutar(async () => {
       const { data } = await api.PATCH("/api/v1/admin/products/{id}/images/{imageId}", {
@@ -276,6 +281,9 @@ function Fotos({ producto, editable, onGuardado }: Props) {
       <h2 id="t-fotos">Fotos</h2>
       <p className="campo-ayuda">La principal es la que se ve en el catálogo. Fotos verticales (4:5) se ven mejor.</p>
       {avisos}
+      {fallaronAlCrear && fotos.length === 0 ? (
+        <Aviso tono="error">El producto se creó, pero las fotos no se pudieron subir. Vuelve a elegirlas aquí.</Aviso>
+      ) : null}
       {fotos.length === 0 ? <p>Aún no hay fotos.</p> : null}
       <div className="galeria-admin">
         {fotos.map((f, i) => (
@@ -330,18 +338,19 @@ function Fotos({ producto, editable, onGuardado }: Props) {
           </div>
         ))}
       </div>
-      {editable ? (
+      {editable && cupo > 0 ? (
         <SubirImagen
           etiqueta="Subir fotos"
           multiple
-          onArchivo={async (archivo) => {
-            const datos = new FormData();
-            datos.append("file", archivo);
-            const p = await enviarFormulario<Producto>(`/api/v1/admin/products/${producto.id}/images`, "POST", datos);
-            onGuardado(p);
+          onArchivos={async (archivos) => {
+            if (archivos.length > cupo) {
+              throw new ApiError(422, { detail: `Puedes agregar ${cupo} ${cupo === 1 ? "foto más" : "fotos más"} (máximo ${MAX_FOTOS_PRODUCTO}).` });
+            }
+            onGuardado(await subirFotosProducto<Producto>(producto.id, archivos));
           }}
         />
       ) : null}
+      {editable && cupo <= 0 ? <p className="campo-ayuda">Llegaste al máximo de {MAX_FOTOS_PRODUCTO} fotos. Borra alguna para subir otra.</p> : null}
     </section>
   );
 }

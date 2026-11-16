@@ -564,6 +564,23 @@ export interface paths {
         patch?: never;
         trace?: never;
     };
+    "/api/v1/admin/products/{id}/images/batch": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        get?: never;
+        put?: never;
+        /** Sube varias imágenes en orden (hasta 10); entran todas o ninguna */
+        post: operations["AdminProductsController_addImages_v1"];
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
     "/api/v1/admin/products/{id}/images/{imageId}": {
         parameters: {
             query?: never;
@@ -2307,6 +2324,10 @@ export interface components {
              * @description JPEG, PNG o WebP, máx. 5 MB
              */
             file: string;
+        };
+        UploadProductImagesDto: {
+            /** @description Hasta 10 imágenes JPEG, PNG o WebP de máx. 5 MB cada una, en orden */
+            files: string[];
         };
         UpdateProductImageDto: {
             altText?: string | null;
@@ -4260,6 +4281,31 @@ export interface operations {
         requestBody: {
             content: {
                 "multipart/form-data": components["schemas"]["UploadProductImageDto"];
+            };
+        };
+        responses: {
+            201: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["AdminProductResponse"];
+                };
+            };
+        };
+    };
+    AdminProductsController_addImages_v1: {
+        parameters: {
+            query?: never;
+            header?: never;
+            path: {
+                id: string;
+            };
+            cookie?: never;
+        };
+        requestBody: {
+            content: {
+                "multipart/form-data": components["schemas"]["UploadProductImagesDto"];
             };
         };
         responses: {

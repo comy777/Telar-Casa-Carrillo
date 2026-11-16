@@ -43,3 +43,21 @@ export function validarImagen(f: File): string | null {
   if (f.size > MAX_IMAGEN) return "La foto pesa más de 5 MB. Redúcela e intenta de nuevo.";
   return null;
 }
+
+/** Fotos que la API acepta por envío y por producto. */
+export const MAX_FOTOS_POR_ENVIO = 10;
+export const MAX_FOTOS_PRODUCTO = 20;
+
+/**
+ * Sube fotos a un producto en el orden recibido, en tandas de {@link MAX_FOTOS_POR_ENVIO}.
+ * Cada tanda entra completa o no entra. Devuelve el producto actualizado por la última tanda.
+ */
+export async function subirFotosProducto<T>(id: string, archivos: File[]): Promise<T | undefined> {
+  let producto: T | undefined;
+  for (let i = 0; i < archivos.length; i += MAX_FOTOS_POR_ENVIO) {
+    const datos = new FormData();
+    for (const f of archivos.slice(i, i + MAX_FOTOS_POR_ENVIO)) datos.append("files", f);
+    producto = await enviarFormulario<T>(`/api/v1/admin/products/${id}/images/batch`, "POST", datos);
+  }
+  return producto;
+}

@@ -126,12 +126,24 @@
   .foto-admin .acciones-fila { gap: 4px; }
   .foto-admin .boton { min-height: 32px; padding: 0 8px; font-size: 0.8rem; }
   .subir-imagen { display: flex; flex-wrap: wrap; gap: 10px; align-items: center; }
+  .selector-fotos { display: grid; gap: 12px; }
+  ol.galeria-admin { list-style: none; margin: 0; padding: 0; }
+  .foto-admin .nombre-foto { font-size: 0.75rem; color: var(--gris); overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
 
+  /* La fila se acomoda al ancho del panel (no de la ventana): en la columna de edición es angosto. */
+  .zona-variantes { display: grid; gap: 10px; container-type: inline-size; }
   .variantes { display: grid; gap: 10px; }
-  .variante { display: grid; grid-template-columns: 1.4fr 1fr 1fr 1fr auto auto; gap: 8px; align-items: end; padding: 10px; background: var(--cal); }
+  .variante {
+    display: grid;
+    grid-template-columns: minmax(8rem, 1.3fr) minmax(8rem, 1.2fr) minmax(8.5rem, 1fr) minmax(8.5rem, 1fr) auto auto;
+    gap: 8px; align-items: end; padding: 10px; background: var(--cal);
+  }
+  .variante .campo { min-width: 0; }
   .variante .campo label { font-size: 0.78rem; }
+  .variante input { min-width: 0; font-variant-numeric: tabular-nums; }
   .variante.inactiva { opacity: 0.6; }
-  @media (max-width: 900px) { .variante { grid-template-columns: 1fr 1fr; } }
+  @container (max-width: 820px) { .variante { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
+  @container (max-width: 380px) { .variante { grid-template-columns: minmax(0, 1fr); } }
 
   .estado-producto { display: flex; gap: 8px; flex-wrap: wrap; align-items: center; }
   .linea-tiempo { list-style: none; display: grid; gap: 8px; border-left: 3px solid var(--verde-claro); padding-left: 14px; }

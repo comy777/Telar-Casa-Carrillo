@@ -201,10 +201,14 @@ export function FiltroSelect({
 export function SubirImagen({
   etiqueta = "Subir foto",
   onArchivo,
+  onArchivos,
   multiple = false,
 }: {
   etiqueta?: string;
-  onArchivo: (f: File) => Promise<void>;
+  /** Recibe cada archivo por separado. */
+  onArchivo?: (f: File) => Promise<void>;
+  /** Recibe juntos los archivos válidos (una sola subida); tiene prioridad sobre onArchivo. */
+  onArchivos?: (fs: File[]) => Promise<void>;
   multiple?: boolean;
 }) {
   const input = useRef<HTMLInputElement>(null);
@@ -222,6 +226,24 @@ export function SubirImagen({
           const archivos = Array.from(e.target.files ?? []);
           e.target.value = "";
           setError(null);
+          if (onArchivos) {
+            const problemas = archivos.flatMap((f) => {
+              const p = validarImagen(f);
+              return p ? [`${f.name}: ${p}`] : [];
+            });
+            const validos = archivos.filter((f) => !validarImagen(f));
+            if (problemas.length) setError(problemas.join(" "));
+            if (validos.length === 0) return;
+            setCargando(true);
+            try {
+              await onArchivos(validos);
+            } catch (err) {
+              setError(errorMessage(err, "No pudimos subir las fotos."));
+            } finally {
+              setCargando(false);
+            }
+            return;
+          }
           for (const f of archivos) {
             const problema = validarImagen(f);
             if (problema) {
@@ -230,7 +252,7 @@ export function SubirImagen({
             }
             setCargando(true);
             try {
-              await onArchivo(f);
+              await onArchivo?.(f);
             } catch (err) {
               setError(errorMessage(err, "No pudimos subir la foto."));
             } finally {
