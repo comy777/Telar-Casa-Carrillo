@@ -3,7 +3,7 @@
 import Image from "next/image";
 import { useState } from "react";
 import { useQuery, useQueryClient } from "@tanstack/react-query";
-import { Aviso, Boton, Campo, CampoTexto, Casilla, Esqueleto } from "@telar/ui";
+import { Aviso, Boton, Campo, CampoSelect, CampoTexto, Casilla, Esqueleto } from "@telar/ui";
 import { errorMessage, type Schema } from "@telar/api-client";
 import { api } from "@/lib/api-browser";
 import { enviarFormulario } from "@/lib/archivos";
@@ -13,6 +13,14 @@ import { ConPermiso } from "@/components/marco";
 
 type Ajustes = Schema<"VenueSettingsResponse">;
 type Actividad = Schema<"AdminVenueActivityResponse">;
+type TipoActividad = Actividad["kind"];
+
+/** El tipo decide dónde aparece en la cotización: los juegos son lo que se alquila por horas. */
+const TIPOS: Record<TipoActividad, { nombre: string; ayuda: string }> = {
+  GAME: { nombre: "Juego", ayuda: "Canchas y mesas: se ofrecen en «Alquiler de cancha»." },
+  FOOD: { nombre: "Comida", ayuda: "Sale en la tienda; en la cotización se pide con la casilla «Queremos comida»." },
+  OTHER: { nombre: "Otra", ayuda: "Se ofrece en eventos y visitas de grupo, no en el alquiler de cancha." },
+};
 
 export default function ElLugar() {
   return (
@@ -146,6 +154,7 @@ function Actividades() {
                 </button>
               ),
             },
+            { titulo: "Tipo", celda: (a) => TIPOS[a.kind].nombre },
             { titulo: "Orden", clase: "num", celda: (a) => a.sortOrder },
             { titulo: "Estado", celda: (a) => (a.isPublished ? <Insignia tono="verde">Publicada</Insignia> : <Insignia>Oculta</Insignia>) },
           ]}
@@ -183,6 +192,7 @@ function FormularioActividad({
 }) {
   const [d, setD] = useState({
     name: actividad?.name ?? "",
+    kind: actividad?.kind ?? ("GAME" as TipoActividad),
     description: actividad?.description ?? "",
     imageAlt: actividad?.imageAlt ?? "",
     sortOrder: String(actividad?.sortOrder ?? 0),
@@ -206,7 +216,7 @@ function FormularioActividad({
         e.preventDefault();
         setEnviando(true);
         await ejecutar(async () => {
-          const campos = { name: d.name, description: d.description || null, sortOrder: Number(d.sortOrder) || 0, isPublished: d.isPublished };
+          const campos = { name: d.name, kind: d.kind, description: d.description || null, sortOrder: Number(d.sortOrder) || 0, isPublished: d.isPublished };
           if (actividad) {
             const { data } = await api.PATCH("/api/v1/admin/venue/activities/{id}", {
               params: { path: { id: actividad.id } },
@@ -224,6 +234,13 @@ function FormularioActividad({
       <h2>{actividad ? actividad.name : "Nueva actividad"}</h2>
       {error ? <Aviso tono="error">{error}</Aviso> : null}
       <Campo etiqueta="Nombre" value={d.name} onChange={(e) => setD({ ...d, name: e.target.value })} required maxLength={80} placeholder="Banquitas" />
+      <CampoSelect etiqueta="Tipo" value={d.kind} onChange={(e) => setD({ ...d, kind: e.target.value as TipoActividad })} ayuda={TIPOS[d.kind].ayuda}>
+        {(Object.keys(TIPOS) as TipoActividad[]).map((k) => (
+          <option key={k} value={k}>
+            {TIPOS[k].nombre}
+          </option>
+        ))}
+      </CampoSelect>
       <CampoTexto
         etiqueta="Descripción"
         rows={3}

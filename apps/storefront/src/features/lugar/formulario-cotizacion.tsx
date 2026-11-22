@@ -8,7 +8,7 @@ import { z } from "zod";
 import { Aviso, Boton, Campo, CampoSelect, CampoTexto, Casilla, cx } from "@telar/ui";
 import { api } from "@/lib/api-browser";
 import { aplicarErrorApi } from "@/lib/formularios";
-import type { TipoCotizacion } from "@/lib/lugar";
+import type { Actividad, TipoCotizacion } from "@/lib/lugar";
 
 const TIPOS: Array<{ valor: TipoCotizacion; titulo: string; texto: string }> = [
   { valor: "EVENT", titulo: "Evento o celebración", texto: "Cumpleaños, reuniones familiares o de empresa." },
@@ -75,7 +75,16 @@ const resolver: Resolver<Datos> = async (valores, contexto, opciones) => {
 
 const CAMPOS = ["kind", "eventDate", "startTime", "durationHours", "people", "name", "email", "phone", "message"] as const;
 
-export function FormularioCotizacion({ actividades }: { actividades: Array<{ id: string; name: string }> }) {
+type OpcionActividad = Pick<Actividad, "id" | "name" | "kind">;
+
+/**
+ * Qué actividades se ofrecen según el tipo: una cancha se alquila para jugar, así que solo van
+ * los juegos. La comida nunca va en la lista porque se pide con su propia casilla.
+ */
+const actividadesPara = (tipo: TipoCotizacion | undefined, todas: OpcionActividad[]) =>
+  todas.filter((a) => a.kind !== "FOOD" && (tipo !== "COURT_RENTAL" || a.kind === "GAME"));
+
+export function FormularioCotizacion({ actividades }: { actividades: OpcionActividad[] }) {
   const [enviada, setEnviada] = useState<{ tipo: string; nombre: string } | null>(null);
   const [error, setError] = useState<string | null>(null);
   const { register, control, handleSubmit, setError: setCampo, reset, formState } = useForm<Datos>({
@@ -83,6 +92,7 @@ export function FormularioCotizacion({ actividades }: { actividades: Array<{ id:
     defaultValues: { activityIds: [], includesFood: false },
   });
   const tipo = useWatch({ control, name: "kind" });
+  const opciones = actividadesPara(tipo, actividades);
   const e = formState.errors;
   const hoy = hoyEnColombia();
 
@@ -126,7 +136,10 @@ export function FormularioCotizacion({ actividades }: { actividades: Array<{ id:
               ...(d.startTime ? { startTime: d.startTime } : {}),
               ...(d.durationHours ? { durationHours: Number(d.durationHours) } : {}),
               ...(d.people ? { people: Number(d.people) } : {}),
-              ...(d.activityIds.length ? { activityIds: d.activityIds } : {}),
+              // Solo las que siguen a la vista: al cambiar de tipo pudo quedar marcada una que ya no aplica.
+              ...((ids) => (ids.length ? { activityIds: ids } : {}))(
+                d.activityIds.filter((id) => actividadesPara(d.kind, actividades).some((a) => a.id === id)),
+              ),
               includesFood: d.includesFood,
               ...(d.message ? { message: d.message } : {}),
               acceptPrivacy: true,
@@ -186,7 +199,7 @@ export function FormularioCotizacion({ actividades }: { actividades: Array<{ id:
             <Campo etiqueta={req("Personas", false)} type="number" inputMode="numeric" min={1} max={2000} {...register("people")} error={e.people?.message} className="campo-corto" />
           ) : null}
 
-          {actividades.length > 0 ? (
+          {opciones.length > 0 ? (
             <Controller
               control={control}
               name="activityIds"
@@ -194,7 +207,7 @@ export function FormularioCotizacion({ actividades }: { actividades: Array<{ id:
                 <fieldset className="grupo-casillas">
                   <legend>{tipo === "COURT_RENTAL" ? "¿Qué quieres jugar?" : "¿Qué les gustaría hacer?"}</legend>
                   <div className="casillas-lugar">
-                    {actividades.map((a) => (
+                    {opciones.map((a) => (
                       <label key={a.id} className="casilla-lugar">
                         <input
                           type="checkbox"

@@ -132,7 +132,7 @@ export default async function Visitanos() {
             <p>Dinos qué quieres hacer, cuándo y cuántas personas vienen. La familia te responde con el valor y los detalles.</p>
             {s.quoteNote ? <p className="lugar-nota">{s.quoteNote}</p> : null}
           </div>
-          <FormularioCotizacion actividades={activities.map((a) => ({ id: a.id, name: a.name }))} />
+          <FormularioCotizacion actividades={activities.map((a) => ({ id: a.id, name: a.name, kind: a.kind }))} />
         </div>
       </section>
     </main>

@@ -3621,9 +3621,12 @@ export interface components {
             mapUrl: string | null;
             quoteNote: string | null;
         };
+        /** @enum {string} */
+        VenueActivityKind: "GAME" | "FOOD" | "OTHER";
         VenueActivityResponse: {
             id: string;
             name: string;
+            kind: components["schemas"]["VenueActivityKind"];
             description: string | null;
             imageUrl: string | null;
             imageAlt: string | null;
@@ -3679,6 +3682,7 @@ export interface components {
         AdminVenueActivityResponse: {
             id: string;
             name: string;
+            kind: components["schemas"]["VenueActivityKind"];
             description: string | null;
             imageUrl: string | null;
             imageAlt: string | null;
@@ -3690,6 +3694,11 @@ export interface components {
         CreateVenueActivityDto: {
             /** @example Banquitas */
             name: string;
+            /**
+             * @description GAME se alquila por horas; FOOD se pide con la casilla de comida
+             * @default OTHER
+             */
+            kind: components["schemas"]["VenueActivityKind"];
             description?: string | null;
             /** @default true */
             isPublished: boolean;
@@ -3699,6 +3708,11 @@ export interface components {
         UpdateVenueActivityDto: {
             /** @example Banquitas */
             name?: string;
+            /**
+             * @description GAME se alquila por horas; FOOD se pide con la casilla de comida
+             * @default OTHER
+             */
+            kind: components["schemas"]["VenueActivityKind"];
             description?: string | null;
             /** @default true */
             isPublished: boolean;
