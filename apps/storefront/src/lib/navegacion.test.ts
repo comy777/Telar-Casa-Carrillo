@@ -34,8 +34,8 @@ describe("navegación parametrizada", () => {
 
   it("arma menú y pie en orden y sin columnas vacías", () => {
     const rutas = con({ artesanos: { sortOrder: 1 }, contacto: { showInHeader: true }, categorias: { footerGroup: null } });
-    expect(rutasMenu(rutas).map((r) => r.key)).toEqual(["artesanos", "categorias", "contacto"]);
-    const pie = rutasPie(con({ categorias: { footerGroup: null }, artesanos: { footerGroup: null } }));
+    expect(rutasMenu(rutas).map((r) => r.key)).toEqual(["artesanos", "categorias", "visitanos", "contacto"]);
+    const pie = rutasPie(con({ categorias: { footerGroup: null }, artesanos: { footerGroup: null }, visitanos: { footerGroup: null } }));
     expect(pie.map((c) => c.columna)).toEqual(["HELP", "INFO"]);
   });
 });

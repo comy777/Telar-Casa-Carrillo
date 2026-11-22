@@ -47,6 +47,13 @@ const GRUPOS: Array<{ titulo: string; enlaces: Enlace[] }> = [
     ],
   },
   {
+    titulo: "El lugar",
+    enlaces: [
+      { href: "/lugar", texto: "Visítanos", permiso: "content:manage" },
+      { href: "/cotizaciones", texto: "Cotizaciones", permiso: "quotes:read" },
+    ],
+  },
+  {
     titulo: "Administración",
     enlaces: [
       { href: "/clientes", texto: "Clientes y usuarios", permiso: "users:read" },

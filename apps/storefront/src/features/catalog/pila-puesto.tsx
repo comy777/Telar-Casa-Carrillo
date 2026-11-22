@@ -5,7 +5,8 @@ import Link from "next/link";
 import { useEffect, useRef, useState } from "react";
 import { Existencias, Precio, cx } from "@telar/ui";
 import type { ProductCard } from "@/lib/catalog";
-import { BotonAgregarRapido } from "@/features/cart/boton-agregar";
+// Carrito oculto por ahora: descomentar para volver a vender en línea.
+// import { BotonAgregarRapido } from "@/features/cart/boton-agregar";
 
 /**
  * La firma del inicio: piezas apiladas como en el puesto de la plaza. Tocar (o pasar el
@@ -78,6 +79,7 @@ export function PilaPuesto({ piezas }: { piezas: ProductCard[] }) {
           </p>
           <p className="nota-iva">IVA incluido · Envío a toda Colombia</p>
           <Existencias disponibilidad={pieza.availability} />
+          {/* Carrito oculto por ahora: descomentar para volver a vender en línea.
           {pieza.hasMultipleVariants ? (
             <Link className="boton boton-accion" href={`/productos/${pieza.slug}`}>
               Elegir color y comprar
@@ -85,6 +87,7 @@ export function PilaPuesto({ piezas }: { piezas: ProductCard[] }) {
           ) : (
             <BotonAgregarRapido slug={pieza.slug} agotada={pieza.availability === "OUT_OF_STOCK"} />
           )}
+          */}
           <Link className="ver-mas" href={`/productos/${pieza.slug}`}>
             Ver la pieza completa
           </Link>

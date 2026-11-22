@@ -15,7 +15,7 @@ type Tipo = "letra" | "tela" | "letrero" | "retrato" | "fila" | "cita" | "banner
 const REGLAS: ReadonlyArray<readonly [selector: string, tipo: Tipo]> = [
   [".seccion h2.titulo, .detalle h2", "letra"],
   [".piezas > .pieza", "tela"],
-  [".letreros > .letrero-cat", "letrero"],
+  [".letreros > .letrero-cat, .lugar-actividades > .actividad", "letrero"],
   [".tejedores > .tejedor-ficha", "retrato"],
   [".precios > li", "fila"],
   [".testimonios > li", "cita"],

@@ -57,7 +57,7 @@
   .pieza .foto-pieza img { object-fit: cover; }
 
   .enlace-cuenta { font-weight: 700; }
-  @media (min-width: 761px) { .letrero-nav nav .enlace-cuenta { margin-left: 8px; padding-left: 16px; border-left: 1px solid rgb(244 244 241 / 0.3); } }
+  @media (min-width: 1121px) { .letrero-nav nav .enlace-cuenta { margin-left: 8px; padding-left: 16px; border-left: 1px solid rgb(244 244 241 / 0.3); } }
 
   .pie .redes { list-style: none; display: flex; gap: 14px; margin-top: 12px; flex-wrap: wrap; }
 

@@ -1,0 +1,100 @@
+/*
+ * Visítanos: el lugar junto al taller. Mismo mundo que el puesto: muro de cal, tablas verdes
+ * pintadas, letreros en la lana de cada cosa y un solo rojo para pedir la cotización.
+ */
+@layer components {
+  /* ---- Primera pantalla: texto a la izquierda, la tabla de "cuándo y dónde" colgada a la derecha ---- */
+  .lugar-portada { padding-bottom: clamp(40px, 6vw, 80px); }
+  .lugar-portada .envoltura {
+    display: grid; grid-template-columns: minmax(0, 3fr) minmax(280px, 2fr);
+    gap: clamp(24px, 5vw, 72px); align-items: start;
+  }
+  .lugar-intro { font-size: clamp(1.05rem, 1.4vw, 1.2rem); max-width: 60ch; }
+  .lugar-que-hay { list-style: none; display: flex; flex-wrap: wrap; gap: 8px; margin-top: 24px; }
+  .lugar-que-hay li {
+    font-family: var(--display); font-size: clamp(1.05rem, 1.8vw, 1.35rem); line-height: 1;
+    background: var(--verde); color: var(--cal); padding: 10px 14px;
+  }
+  .lugar-acciones { margin-top: clamp(24px, 3vw, 36px); }
+  .lugar-tabla { margin-top: clamp(24px, 4vw, 56px); }
+  .lugar-tabla h2 { font-size: clamp(1.8rem, 3vw, 2.6rem); }
+  .lugar-tabla dl { display: grid; gap: 2px; }
+  .lugar-tabla dt { font-size: 0.85rem; font-weight: 600; color: var(--verde-claro); margin-top: 10px; }
+  .lugar-tabla dt:first-child { margin-top: 0; }
+  .lugar-tabla dd { font-size: 1.05rem; }
+  .lugar-tabla .boton { align-self: start; margin-top: 6px; }
+  @media (min-width: 901px) { .lugar-tabla { transform: rotate(-1deg); transform-origin: top right; } }
+  @media (max-width: 900px) {
+    .lugar-portada .envoltura { grid-template-columns: 1fr; }
+    .lugar-tabla { margin-top: 0; }
+  }
+
+  /* ---- Actividades: letreros pintados en lana, con la placa verde al pie ---- */
+  .lugar-actividades { list-style: none; display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: clamp(16px, 2.4vw, 32px); }
+  .actividad { display: flex; flex-direction: column; background: var(--lana); }
+  .actividad-foto {
+    position: relative; aspect-ratio: 4 / 3; overflow: hidden;
+    display: grid; place-items: center; padding: 16px;
+    font-size: 0.8rem; font-weight: 600; text-align: center;
+  }
+  .actividad-foto::before { content: ""; position: absolute; inset: 0 0 auto; height: 9px; background: rgb(0 0 0 / 0.14); z-index: 1; }
+  .actividad-foto img { object-fit: cover; }
+  .actividad .placa { background: var(--verde); color: var(--cal); padding: 16px 18px 18px; margin: 0 clamp(12px, 2vw, 20px) clamp(12px, 2vw, 20px); margin-top: -28px; position: relative; }
+  .actividad .placa h3 { font-family: var(--display); font-weight: 400; font-size: clamp(1.5rem, 2.6vw, 2.1rem); line-height: 1.05; }
+  .actividad .placa p { color: var(--verde-claro); margin-top: 6px; max-width: 52ch; }
+  @media (max-width: 760px) { .lugar-actividades { grid-template-columns: 1fr; } }
+
+  /* ---- Cotizar: el texto a un lado y la boleta al otro ---- */
+  .lugar-cotizar { background: var(--cal-sombra); }
+  .lugar-cotizar .envoltura {
+    display: grid; grid-template-columns: minmax(0, 2fr) minmax(0, 3fr);
+    gap: clamp(24px, 5vw, 72px); align-items: start;
+  }
+  .lugar-cotizar-texto { position: sticky; top: 96px; }
+  .lugar-cotizar-texto p { max-width: 44ch; font-size: 1.05rem; }
+  .lugar-nota { margin-top: 14px; font-size: 0.95rem; color: var(--tinta-suave); }
+  @media (max-width: 900px) {
+    .lugar-cotizar .envoltura { grid-template-columns: 1fr; }
+    .lugar-cotizar-texto { position: static; }
+  }
+
+  .boleta { background: var(--blanco); padding: clamp(20px, 3vw, 36px); box-shadow: inset 0 6px 0 var(--verde); }
+  .boleta .fila-3 { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 14px; }
+  .boleta .campo-corto { max-width: 220px; }
+  @media (max-width: 600px) {
+    .boleta .fila-3, .boleta .fila-2 { grid-template-columns: 1fr; }
+    .boleta .campo-corto { max-width: none; }
+  }
+
+  /* Los tres tipos son tablas pequeñas: la elegida queda pintada de verde. */
+  .tipos-cotizacion { border: 0; padding: 0; margin: 0; display: grid; gap: 10px; }
+  .tipos-cotizacion legend, .grupo-casillas legend { font-weight: 700; font-size: 1rem; margin-bottom: 10px; padding: 0; }
+  .tipos { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 10px; }
+  .tipo {
+    position: relative; display: grid; gap: 4px; align-content: start;
+    padding: 14px 14px 16px; cursor: pointer;
+    background: var(--cal); box-shadow: inset 0 0 0 2px var(--gris-claro);
+  }
+  .tipo input { position: absolute; opacity: 0; inset: 0; margin: 0; cursor: pointer; }
+  .tipo strong { font-family: var(--display); font-weight: 400; font-size: 1.15rem; line-height: 1.1; }
+  .tipo span { font-size: 0.85rem; color: var(--tinta-suave); }
+  .tipo:hover { box-shadow: inset 0 0 0 2px var(--verde); }
+  .tipo.elegido, .tipo:has(input:checked) { background: var(--verde); color: var(--cal); box-shadow: none; }
+  .tipo.elegido span, .tipo:has(input:checked) span { color: var(--verde-claro); }
+  .tipo:has(input:focus-visible) { outline: 3px solid var(--almagre); outline-offset: 3px; }
+  @media (max-width: 760px) { .tipos { grid-template-columns: 1fr; } }
+
+  .grupo-casillas { border: 0; padding: 0; margin: 0; }
+  .casillas-lugar { display: flex; flex-wrap: wrap; gap: 8px; }
+  .casilla-lugar {
+    display: inline-flex; align-items: center; gap: 8px; min-height: 44px; padding: 0 14px;
+    background: var(--cal); box-shadow: inset 0 0 0 2px var(--gris-claro); cursor: pointer; font-weight: 600;
+  }
+  .casilla-lugar input { width: 18px; height: 18px; accent-color: var(--verde); }
+  .casilla-lugar:has(input:checked) { box-shadow: inset 0 0 0 2px var(--verde); background: var(--verde-claro); }
+
+  .boleta-ok { background: var(--verde); color: var(--cal); padding: clamp(24px, 4vw, 40px); display: grid; gap: 14px; justify-items: start; }
+  .boleta-ok:focus { outline: none; }
+  .boleta-ok h3 { font-family: var(--display); font-weight: 400; font-size: clamp(1.8rem, 3vw, 2.4rem); line-height: 1.05; }
+  .boleta-ok p { max-width: 52ch; }
+}

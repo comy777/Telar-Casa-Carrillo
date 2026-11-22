@@ -4,7 +4,8 @@ import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { useState } from "react";
 import { Icono } from "@telar/ui";
-import { useCarrito } from "@/features/cart/cart-context";
+// Carrito oculto por ahora: descomentar para volver a vender en línea.
+// import { useCarrito } from "@/features/cart/cart-context";
 import { useSesion } from "@/features/auth/session-context";
 import { useRutaActiva } from "@/features/navigation/navegacion-context";
 
@@ -16,11 +17,12 @@ export interface EnlaceNav {
 export function Encabezado({ nombre, enlaces }: { nombre: string; enlaces: EnlaceNav[] }) {
   const ruta = usePathname();
   const [abierto, setAbierto] = useState(false);
-  const { carrito, abrir } = useCarrito();
+  // Carrito oculto por ahora: descomentar para volver a vender en línea.
+  // const { carrito, abrir } = useCarrito();
   const { estado, usuario } = useSesion();
-  const piezas = carrito?.itemCount ?? 0;
+  // const piezas = carrito?.itemCount ?? 0;
   const conCuenta = useRutaActiva("cuenta");
-  const conCarrito = useRutaActiva("carrito");
+  // const conCarrito = useRutaActiva("carrito");
 
   // Al cambiar de página se cierra el menú (ajuste de estado durante el render, sin efecto).
   const [rutaMenu, setRutaMenu] = useState(ruta);
@@ -47,12 +49,14 @@ export function Encabezado({ nombre, enlaces }: { nombre: string; enlaces: Enlac
             </Link>
           ) : null}
         </nav>
+        {/* Carrito oculto por ahora: descomentar para volver a vender en línea.
         {conCarrito ? (
           <button type="button" className="carrito" onClick={abrir} aria-label={`Carrito, ${piezas} ${piezas === 1 ? "pieza" : "piezas"}`}>
             <Icono nombre="bolsa" width={18} height={18} />
             <span className="texto">Carrito</span> {piezas}
           </button>
         ) : null}
+        */}
         <button
           type="button"
           className="menu-boton"

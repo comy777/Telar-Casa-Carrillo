@@ -3,28 +3,31 @@
 import Image from "next/image";
 import Link from "next/link";
 import { useMemo, useState } from "react";
-import { Boton, Cantidad, Existencias, Precio, cx } from "@telar/ui";
-import { errorMessage } from "@telar/api-client";
+import { Existencias, Precio, cx } from "@telar/ui";
+// Carrito oculto por ahora: descomentar para volver a vender en línea.
+// import { Boton, Cantidad } from "@telar/ui";
+// import { errorMessage } from "@telar/api-client";
 import type { ProductDetail } from "@/lib/catalog";
-import { useCarrito } from "@/features/cart/cart-context";
-import { useVentaCerrada } from "@/features/navigation/navegacion-context";
+// import { useCarrito } from "@/features/cart/cart-context";
+// import { useVentaCerrada } from "@/features/navigation/navegacion-context";
 
 type Variante = ProductDetail["variants"][number];
 
 /** Nombre corto de la opción: el valor del atributo si lo hay ("Gris oveja"), si no el nombre. */
 const etiquetaVariante = (v: Variante) => Object.values(v.attributes)[0] ?? v.name;
-const MAX_POR_LINEA = 10;
+// const MAX_POR_LINEA = 10; // carrito oculto
 
 export function FichaProducto({ producto }: { producto: ProductDetail }) {
   const variantes = producto.variants;
   const inicial = variantes.find((v) => v.availability !== "OUT_OF_STOCK") ?? variantes[0];
   const [varianteId, setVarianteId] = useState(inicial?.id);
   const variante = variantes.find((v) => v.id === varianteId) ?? inicial;
-  const [cantidad, setCantidad] = useState(1);
-  const [enviando, setEnviando] = useState(false);
-  const [error, setError] = useState<string | null>(null);
-  const { agregar } = useCarrito();
-  const ventaCerrada = useVentaCerrada();
+  // Carrito oculto por ahora: descomentar para volver a vender en línea.
+  // const [cantidad, setCantidad] = useState(1);
+  // const [enviando, setEnviando] = useState(false);
+  // const [error, setError] = useState<string | null>(null);
+  // const { agregar } = useCarrito();
+  // const ventaCerrada = useVentaCerrada();
 
   // Fotos: las de la variante elegida primero, luego las generales.
   const fotos = useMemo(() => {
@@ -36,7 +39,7 @@ export function FichaProducto({ producto }: { producto: ProductDetail }) {
   const [fotoId, setFotoId] = useState<string | undefined>(undefined);
   const foto = fotos.find((f) => f.id === fotoId) ?? fotos[0];
 
-  const agotada = !variante || variante.availability === "OUT_OF_STOCK";
+  // const agotada = !variante || variante.availability === "OUT_OF_STOCK"; // carrito oculto
   const atributo = Object.keys(variantes[0]?.attributes ?? {})[0];
 
   return (
@@ -67,6 +70,8 @@ export function FichaProducto({ producto }: { producto: ProductDetail }) {
 
       <form
         className="tabla"
+        onSubmit={(e) => e.preventDefault()}
+        /* Carrito oculto por ahora: descomentar para volver a vender en línea.
         onSubmit={async (e) => {
           e.preventDefault();
           if (!variante || agotada) return;
@@ -80,6 +85,7 @@ export function FichaProducto({ producto }: { producto: ProductDetail }) {
             setEnviando(false);
           }
         }}
+        */
       >
         <h1>{producto.name}</h1>
         {producto.artisan ? (
@@ -113,7 +119,7 @@ export function FichaProducto({ producto }: { producto: ProductDetail }) {
                       onChange={() => {
                         setVarianteId(v.id);
                         setFotoId(undefined);
-                        setCantidad(1);
+                        // setCantidad(1); // carrito oculto
                       }}
                       aria-label={`${etiquetaVariante(v)}${v.availability === "OUT_OF_STOCK" ? ", agotada" : ""}`}
                     />
@@ -127,17 +133,21 @@ export function FichaProducto({ producto }: { producto: ProductDetail }) {
 
         {variante ? <Existencias disponibilidad={variante.availability} /> : null}
 
+        {/* Carrito oculto por ahora: descomentar para volver a vender en línea.
         <div className="compra">
           <Cantidad valor={cantidad} max={MAX_POR_LINEA} onCambio={setCantidad} disabled={agotada || !!ventaCerrada} />
           <Boton type="submit" variante="accion" cargando={enviando} disabled={agotada || !!ventaCerrada}>
             {ventaCerrada ?? (agotada ? "Agotada" : "Agregar al carrito")}
           </Boton>
         </div>
+        */}
+        {/* carrito oculto
         {error ? (
           <p className="campo-error" role="alert">
             {error}
           </p>
         ) : null}
+        */}
 
         <ul className="garantias">
           <li>

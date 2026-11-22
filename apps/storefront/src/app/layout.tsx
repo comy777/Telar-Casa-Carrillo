@@ -5,7 +5,8 @@ import { Providers } from "./providers";
 import { Encabezado } from "@/components/encabezado";
 import { Pie } from "@/components/pie";
 import { Movimiento } from "@/components/movimiento";
-import { PanelCarrito } from "@/features/cart/panel-carrito";
+// Carrito oculto por ahora: descomentar para volver a vender en línea.
+// import { PanelCarrito } from "@/features/cart/panel-carrito";
 import { getCategories } from "@/lib/catalog";
 import { getNavigation, getPages, getStoreSettings } from "@/lib/content";
 import { rutaActiva, rutasMenu, rutasPie } from "@/lib/navegacion";
@@ -55,7 +56,7 @@ export default async function RootLayout({ children }: { children: React.ReactNo
           <Encabezado nombre={ajustes.storeName} enlaces={enlaces} />
           <div id="contenido">{children}</div>
           <Pie nombre={ajustes.storeName} columnas={rutasPie(rutas)} categorias={categorias} paginas={paginas} datos={ajustes.footer} />
-          <PanelCarrito />
+          {/* Carrito oculto por ahora: descomentar para volver a vender en línea. <PanelCarrito /> */}
           <Movimiento />
         </Providers>
       </body>

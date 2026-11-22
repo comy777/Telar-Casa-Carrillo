@@ -14,6 +14,7 @@ export type ClaveRuta =
   | "catalogo"
   | "categorias"
   | "artesanos"
+  | "visitanos"
   | "carrito"
   | "checkout"
   | "pedido"
@@ -33,6 +34,7 @@ export const RUTAS_POR_DEFECTO: Ruta[] = [
   { key: "catalogo", path: "/productos", label: "Catálogo", isEnabled: true, showInHeader: false, footerGroup: null, sortOrder: 10 },
   { key: "categorias", path: "/categorias", label: "Categorías", isEnabled: true, showInHeader: true, footerGroup: "SHOP", sortOrder: 20 },
   { key: "artesanos", path: "/artesanos", label: "La familia", isEnabled: true, showInHeader: true, footerGroup: "SHOP", sortOrder: 30 },
+  { key: "visitanos", path: "/visitanos", label: "Visítanos", isEnabled: true, showInHeader: true, footerGroup: "SHOP", sortOrder: 35 },
   { key: "carrito", path: "/carrito", label: "Carrito", isEnabled: true, showInHeader: false, footerGroup: null, sortOrder: 40 },
   { key: "checkout", path: "/checkout", label: "Finalizar compra", isEnabled: true, showInHeader: false, footerGroup: null, sortOrder: 50 },
   { key: "pedido", path: "/pedido", label: "Pedido de invitado", isEnabled: true, showInHeader: false, footerGroup: null, sortOrder: 60 },

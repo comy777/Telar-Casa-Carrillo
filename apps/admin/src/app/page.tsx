@@ -193,6 +193,10 @@ function Contenido() {
                 <dd>
                   <Link href="/mensajes">{d.operations.newContactMessages}</Link>
                 </dd>
+                <dt>Cotizaciones nuevas</dt>
+                <dd>
+                  <Link href="/cotizaciones?estado=NEW">{d.operations.newQuoteRequests}</Link>
+                </dd>
               </dl>
             </section>
           </div>

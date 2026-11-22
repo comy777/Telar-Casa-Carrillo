@@ -1819,6 +1819,144 @@ export interface paths {
         patch?: never;
         trace?: never;
     };
+    "/api/v1/venue": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        /** «Visítanos»: presentación, horario, ubicación y actividades publicadas */
+        get: operations["PublicVenueController_page_v1"];
+        put?: never;
+        post?: never;
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
+    "/api/v1/venue/quotes": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        get?: never;
+        put?: never;
+        /**
+         * Solicitud de cotización: evento, visita de grupo o alquiler de cancha
+         * @description Avisa a la tienda y envía una confirmación a quien la pide. Errores 422 con code: CONSENT_REQUIRED, INVALID_EMAIL, INVALID_FIELD, INVALID_EVENT_DATE, EVENT_DATE_IN_PAST, INVALID_START_TIME, EVENT_DATE_REQUIRED, PEOPLE_REQUIRED, START_TIME_REQUIRED, DURATION_REQUIRED, ACTIVITY_NOT_AVAILABLE.
+         */
+        post: operations["PublicVenueController_requestQuote_v1"];
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
+    "/api/v1/admin/venue/settings": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        get: operations["AdminVenueController_settings_v1"];
+        /** Reemplaza los ajustes de «Visítanos» (lo que no se envía queda vacío) */
+        put: operations["AdminVenueController_saveSettings_v1"];
+        post?: never;
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
+    "/api/v1/admin/venue/activities": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        get: operations["AdminVenueController_activities_v1"];
+        put?: never;
+        post: operations["AdminVenueController_createActivity_v1"];
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
+    "/api/v1/admin/venue/activities/{id}": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        get?: never;
+        put?: never;
+        post?: never;
+        delete: operations["AdminVenueController_deleteActivity_v1"];
+        options?: never;
+        head?: never;
+        patch: operations["AdminVenueController_updateActivity_v1"];
+        trace?: never;
+    };
+    "/api/v1/admin/venue/activities/{id}/image": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        get?: never;
+        /** Sube o reemplaza la imagen (borra la anterior) */
+        put: operations["AdminVenueController_replaceActivityImage_v1"];
+        post?: never;
+        /** Quita la imagen de la actividad */
+        delete: operations["AdminVenueController_removeActivityImage_v1"];
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
+    "/api/v1/admin/quotes": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        /** Solicitudes de cotización, más recientes primero */
+        get: operations["AdminQuotesController_list_v1"];
+        put?: never;
+        post?: never;
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
+    "/api/v1/admin/quotes/{id}": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        get: operations["AdminQuotesController_get_v1"];
+        put?: never;
+        post?: never;
+        delete?: never;
+        options?: never;
+        head?: never;
+        /** Cambia el estado o las notas internas */
+        patch: operations["AdminQuotesController_update_v1"];
+        trace?: never;
+    };
     "/api/health": {
         parameters: {
             query?: never;
@@ -3096,6 +3234,8 @@ export interface components {
             lowStockVariants: number;
             outOfStockVariants: number;
             newContactMessages: number;
+            /** @description Solicitudes de cotización en estado NEW */
+            newQuoteRequests: number;
         };
         MetricsResponse: {
             range: components["schemas"]["MetricsRange"];
@@ -3469,6 +3609,147 @@ export interface components {
             total: number;
             page: number;
             pageSize: number;
+        };
+        VenueSettingsResponse: {
+            title: string | null;
+            /** @description Markdown */
+            intro: string | null;
+            /** @description Texto libre, varias líneas */
+            schedule: string | null;
+            address: string | null;
+            /** @description URL https */
+            mapUrl: string | null;
+            quoteNote: string | null;
+        };
+        VenueActivityResponse: {
+            id: string;
+            name: string;
+            description: string | null;
+            imageUrl: string | null;
+            imageAlt: string | null;
+        };
+        VenuePageResponse: {
+            settings: components["schemas"]["VenueSettingsResponse"];
+            /** @description Solo las publicadas, en orden */
+            activities: components["schemas"]["VenueActivityResponse"][];
+        };
+        /** @enum {string} */
+        QuoteKind: "EVENT" | "GROUP_VISIT" | "COURT_RENTAL";
+        CreateQuoteDto: {
+            kind: components["schemas"]["QuoteKind"];
+            name: string;
+            /** @example ana@correo.com */
+            email: string;
+            phone: string;
+            /**
+             * Format: date
+             * @description AAAA-MM-DD; no anterior a hoy (hora de Colombia). Obligatoria para EVENT y COURT_RENTAL
+             * @example 2026-12-20
+             */
+            eventDate?: string | null;
+            /**
+             * @description HH:MM (00:00 a 23:59). Obligatoria para COURT_RENTAL
+             * @example 15:00
+             */
+            startTime?: string | null;
+            /** @description Horas. Obligatoria para COURT_RENTAL */
+            durationHours?: number | null;
+            /** @description Obligatoria para EVENT y GROUP_VISIT */
+            people?: number | null;
+            /** @description Actividades publicadas que le interesan */
+            activityIds?: string[];
+            /** @default false */
+            includesFood: boolean;
+            message?: string | null;
+            /** @description Debe ser true: aceptación del tratamiento de datos (Ley 1581). Si no, CONSENT_REQUIRED */
+            acceptPrivacy: boolean;
+        };
+        VenueSettingsDto: {
+            title?: string | null;
+            /** @description Markdown: ## títulos, párrafos, listas con -, **negrita** y [enlaces](/ruta) */
+            intro?: string | null;
+            /** @description Texto libre, una línea por franja de horario */
+            schedule?: string | null;
+            address?: string | null;
+            /** @description Enlace https al mapa */
+            mapUrl?: string | null;
+            /** @description Nota junto al formulario y en el correo de confirmación */
+            quoteNote?: string | null;
+        };
+        AdminVenueActivityResponse: {
+            id: string;
+            name: string;
+            description: string | null;
+            imageUrl: string | null;
+            imageAlt: string | null;
+            isPublished: boolean;
+            sortOrder: number;
+            /** Format: date-time */
+            updatedAt: string;
+        };
+        CreateVenueActivityDto: {
+            /** @example Banquitas */
+            name: string;
+            description?: string | null;
+            /** @default true */
+            isPublished: boolean;
+            /** @default 0 */
+            sortOrder: number;
+        };
+        UpdateVenueActivityDto: {
+            /** @example Banquitas */
+            name?: string;
+            description?: string | null;
+            /** @default true */
+            isPublished: boolean;
+            /** @default 0 */
+            sortOrder: number;
+            /** @description Texto alternativo de la imagen */
+            imageAlt?: string | null;
+        };
+        VenueActivityImageDto: {
+            /**
+             * Format: binary
+             * @description JPEG, PNG o WebP, máx. 5 MB
+             */
+            file: string;
+        };
+        /** @enum {string} */
+        QuoteStatus: "NEW" | "IN_PROGRESS" | "QUOTED" | "CLOSED";
+        QuoteRequestResponse: {
+            id: string;
+            kind: components["schemas"]["QuoteKind"];
+            name: string;
+            email: string;
+            phone: string;
+            /**
+             * Format: date
+             * @example 2026-12-20
+             */
+            eventDate: string | null;
+            /** @example 15:00 */
+            startTime: string | null;
+            durationHours: number | null;
+            people: number | null;
+            activityNames: string[];
+            includesFood: boolean;
+            message: string | null;
+            status: components["schemas"]["QuoteStatus"];
+            adminNotes: string | null;
+            /** Format: date-time */
+            createdAt: string;
+            /** Format: date-time */
+            updatedAt: string;
+        };
+        QuoteRequestPage: {
+            items: components["schemas"]["QuoteRequestResponse"][];
+            total: number;
+            page: number;
+            pageSize: number;
+        };
+        UpdateQuoteDto: {
+            status?: components["schemas"]["QuoteStatus"];
+            adminNotes?: string | null;
         };
         HealthResponse: {
             /** @example ok */
@@ -6546,6 +6827,292 @@ export interface operations {
                 };
                 content: {
                     "application/json": components["schemas"]["SubscriberPage"];
+                };
+            };
+        };
+    };
+    PublicVenueController_page_v1: {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        requestBody?: never;
+        responses: {
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["VenuePageResponse"];
+                };
+            };
+        };
+    };
+    PublicVenueController_requestQuote_v1: {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        requestBody: {
+            content: {
+                "application/json": components["schemas"]["CreateQuoteDto"];
+            };
+        };
+        responses: {
+            202: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["ReceivedResponse"];
+                };
+            };
+        };
+    };
+    AdminVenueController_settings_v1: {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        requestBody?: never;
+        responses: {
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["VenueSettingsResponse"];
+                };
+            };
+        };
+    };
+    AdminVenueController_saveSettings_v1: {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        requestBody: {
+            content: {
+                "application/json": components["schemas"]["VenueSettingsDto"];
+            };
+        };
+        responses: {
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["VenueSettingsResponse"];
+                };
+            };
+        };
+    };
+    AdminVenueController_activities_v1: {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        requestBody?: never;
+        responses: {
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["AdminVenueActivityResponse"][];
+                };
+            };
+        };
+    };
+    AdminVenueController_createActivity_v1: {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        requestBody: {
+            content: {
+                "application/json": components["schemas"]["CreateVenueActivityDto"];
+            };
+        };
+        responses: {
+            201: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["AdminVenueActivityResponse"];
+                };
+            };
+        };
+    };
+    AdminVenueController_deleteActivity_v1: {
+        parameters: {
+            query?: never;
+            header?: never;
+            path: {
+                id: string;
+            };
+            cookie?: never;
+        };
+        requestBody?: never;
+        responses: {
+            204: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content?: never;
+            };
+        };
+    };
+    AdminVenueController_updateActivity_v1: {
+        parameters: {
+            query?: never;
+            header?: never;
+            path: {
+                id: string;
+            };
+            cookie?: never;
+        };
+        requestBody: {
+            content: {
+                "application/json": components["schemas"]["UpdateVenueActivityDto"];
+            };
+        };
+        responses: {
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["AdminVenueActivityResponse"];
+                };
+            };
+        };
+    };
+    AdminVenueController_replaceActivityImage_v1: {
+        parameters: {
+            query?: never;
+            header?: never;
+            path: {
+                id: string;
+            };
+            cookie?: never;
+        };
+        requestBody: {
+            content: {
+                "multipart/form-data": components["schemas"]["VenueActivityImageDto"];
+            };
+        };
+        responses: {
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["AdminVenueActivityResponse"];
+                };
+            };
+        };
+    };
+    AdminVenueController_removeActivityImage_v1: {
+        parameters: {
+            query?: never;
+            header?: never;
+            path: {
+                id: string;
+            };
+            cookie?: never;
+        };
+        requestBody?: never;
+        responses: {
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["AdminVenueActivityResponse"];
+                };
+            };
+        };
+    };
+    AdminQuotesController_list_v1: {
+        parameters: {
+            query?: {
+                page?: number;
+                pageSize?: number;
+                status?: components["schemas"]["QuoteStatus"];
+                kind?: components["schemas"]["QuoteKind"];
+            };
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        requestBody?: never;
+        responses: {
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["QuoteRequestPage"];
+                };
+            };
+        };
+    };
+    AdminQuotesController_get_v1: {
+        parameters: {
+            query?: never;
+            header?: never;
+            path: {
+                id: string;
+            };
+            cookie?: never;
+        };
+        requestBody?: never;
+        responses: {
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["QuoteRequestResponse"];
+                };
+            };
+        };
+    };
+    AdminQuotesController_update_v1: {
+        parameters: {
+            query?: never;
+            header?: never;
+            path: {
+                id: string;
+            };
+            cookie?: never;
+        };
+        requestBody: {
+            content: {
+                "application/json": components["schemas"]["UpdateQuoteDto"];
+            };
+        };
+        responses: {
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["QuoteRequestResponse"];
                 };
             };
         };

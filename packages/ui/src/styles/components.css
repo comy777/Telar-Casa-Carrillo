@@ -22,7 +22,7 @@
   white-space: nowrap;
 }
 .letrero-nav nav { display: flex; gap: clamp(16px, 2.6vw, 36px); }
-.letrero-nav nav a { text-decoration: none; font-weight: 600; font-size: 0.95rem; padding-block: 8px; }
+.letrero-nav nav a { text-decoration: none; font-weight: 600; font-size: 0.95rem; padding-block: 8px; white-space: nowrap; }
 .letrero-nav nav a:hover, .letrero-nav nav a[aria-current] { text-decoration: underline; text-decoration-thickness: 2px; }
 .carrito {
   display: inline-flex; align-items: center; gap: 8px;
@@ -34,7 +34,8 @@
 .menu-boton { display: none; background: none; border: 0; color: var(--cal); min-width: 44px; min-height: 44px; place-items: center; }
 .menu-boton svg { width: 26px; height: 26px; }
 
-@media (max-width: 760px) {
+/* El menú pasa a botón antes de que los enlaces (configurables en el panel) dejen de caber. */
+@media (max-width: 1120px) {
   .letrero-nav nav { display: none; }
   .letrero-nav nav.abierto {
     display: flex; flex-direction: column; gap: 0;
@@ -43,8 +44,8 @@
   }
   .letrero-nav nav.abierto a { padding-block: 14px; border-bottom: 1px solid rgb(244 244 241 / 0.15); }
   .menu-boton { display: inline-flex; }
-  .carrito span.texto { display: none; }
 }
+@media (max-width: 760px) { .carrito span.texto { display: none; } }
 
 /* ---------- Zócalo (cierre de secciones) ---------- */
 .zocalo { height: clamp(28px, 4vw, 44px); background: var(--verde); border-top: 6px solid var(--verde-hondo); }

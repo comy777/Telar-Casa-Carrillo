@@ -13,6 +13,7 @@ const PAGINAS_FIJAS = [
   "/artesanos",
   "/preguntas-frecuentes",
   "/contacto",
+  "/visitanos",
 ];
 
 export default async function sitemap(): Promise<MetadataRoute.Sitemap> {

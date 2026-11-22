@@ -261,7 +261,7 @@ A centered container (`max` 1360px) with a fluid side gutter (`gutter`, 16px →
 - **Category signs:** 3 columns, 1 under 760px. **Weavers:** 3 columns, 2 under 760px.
 - **Ficha:** 7fr gallery / 5fr sticky tabla; details in 3 columns below a 6px green rule; all single column under 900px.
 - **Price board:** a green tablero with a 2-column price list (1 under 760px), dotted leaders between name and price.
-- **Breakpoints:** 600px (phone), 760px (nav collapses to menu, most grids drop), 900px (two-column layouts stack).
+- **Breakpoints:** 600px (phone), 760px (most grids drop), 900px (two-column layouts stack), 1120px (nav collapses to the menu button; its links are configurable in the panel, so it collapses before they stop fitting).
 
 ### Named Rules
 **The Zócalo Rule.** A green skirting band (`zocalo` height, 6px `verde-hondo` top edge) closes the first screen and sits above the footer. It is the stall's wall base, not a divider; use it only to close a screen or the page.
@@ -285,7 +285,7 @@ Every corner is square (`rounded.none`). Edges are straight brush edges: solid f
 ## Components
 
 ### Letrero (navigation)
-The painted sign bar. Sticky, `verde`, 64px tall. Brand in the slab (clamp(1.15rem, 2.4vw, 1.6rem)) pushed left; links in Hanken 600 0.95rem, `cal`, underlined 2px on hover and when current. The cart is a small `cal` plaque with `verde-hondo` text and a bag icon. Under 760px links collapse behind a menu button into a full-width `verde-hondo` panel with 14px rows and translucent hairlines; the cart keeps only icon and count.
+The painted sign bar. Sticky, `verde`, 64px tall. Brand in the slab (clamp(1.15rem, 2.4vw, 1.6rem)) pushed left; links in Hanken 600 0.95rem, `cal`, underlined 2px on hover and when current. The cart is a small `cal` plaque with `verde-hondo` text and a bag icon. Under 1120px links collapse behind a menu button into a full-width `verde-hondo` panel with 14px rows and translucent hairlines; the cart keeps only icon and count.
 
 ### Buttons
 - **Shape:** square (0px), min-height 52px, 24px side padding, Hanken 700 1rem, +0.01em, optional 20px icon with 10px gap.
